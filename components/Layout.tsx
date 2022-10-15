@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
+import { Fragment } from "react";
 import FooterContainer from "./foot/FooterContainer";
 import SubscriptionForm from "./foot/SubscriptionForm";
 import HeaderContainer from "./head/HeaderContainer";
@@ -10,16 +10,14 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ children }) => {
 	return (
-		<Box>
-			{/* header container */}
-			<HeaderContainer />
+		<Fragment>
 			{/* content */}
 			{children}
 			{/* Subscription Form */}
 			<SubscriptionForm />
 			{/* Footer Container */}
-			{/* <FooterContainer /> */}
-		</Box>
+			<FooterContainer />
+		</Fragment>
 	);
 };
 
