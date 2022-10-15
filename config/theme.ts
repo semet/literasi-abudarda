@@ -1,14 +1,11 @@
-import "@fontsource/lato";
-import "@fontsource/raleway";
-
 import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
 	colors: {
-		brand: "#29ace2",
+		brand: "#3EC1D3",
 	},
 	fonts: {
-		heading: `'Raleway', sans-serif`,
+		heading: `'Inter Tight', sans-serif`,
 		body: `'Lato', sans-serif`,
 	},
 });
