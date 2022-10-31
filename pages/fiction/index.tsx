@@ -6,14 +6,14 @@ import FictionMainCard from "../../components/fiction/FictionMainCard";
 import FictionSidebar from "../../components/fiction/FictionSidebar";
 import LayoutSecondary from "../../components/LayoutSecondary";
 
-const index: NextPage<{}> = () => {
+const FictionPage: NextPage<{}> = () => {
 	return (
-		<LayoutSecondary>
+		<LayoutSecondary title={"Karya Fiksi"}>
 			<Head>
 				<title>Karya Fiksi</title>
 			</Head>
 			<Box p={"4"}>
-				<Flex gap={4}>
+				<Flex gap={12}>
 					<Box w={{ base: "full" }} experimental_spaceY={"6"}>
 						{Array(6)
 							.fill(0)
@@ -36,4 +36,4 @@ const index: NextPage<{}> = () => {
 	);
 };
 
-export default index;
+export default FictionPage;

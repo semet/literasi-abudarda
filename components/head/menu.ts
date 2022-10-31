@@ -27,12 +27,12 @@ export const menus: Menu[] = [
 	},
 	{
 		label: "E-book",
-		link: "#",
+		link: "/e-book",
 	},
 
 	{
 		label: "About",
-		link: "#",
+		link: "/about",
 	},
 	{
 		label: "Donasi",

@@ -1,8 +1,19 @@
-import { Box, Flex, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Link, Stack, Text } from "@chakra-ui/react";
+import { About } from "@prisma/client";
+import { useQuery } from "@tanstack/react-query";
 import SectionSubTitle from "../shared/SectionSubTitle";
 import SectionTitle from "../shared/SectionTitle";
 
 const AboutSection = () => {
+	const {
+		data: about,
+		isLoading,
+		isError,
+	} = useQuery<About>(["about"], async () => {
+		const res = await fetch("/api/about");
+		const data = await res.json();
+		return data;
+	});
 	return (
 		<Flex
 			alignItems={"center"}
@@ -37,21 +48,28 @@ const AboutSection = () => {
 					<SectionSubTitle color="gray.500">
 						Kenapa sih kami sampe bisa ada d sini dan membangun semua ini?
 					</SectionSubTitle>
-					<Text color={"gray.700"} lineHeight={"7"} textAlign={"justify"}>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae,
-						voluptates. Ad quas omnis, autem est consectetur voluptatum ducimus ipsa
-						expedita fugiat rem, quod quidem, facilis praesentium qui veniam
-						distinctio eum! Lorem ipsum dolor sit, amet consectetur adipisicing
-						elit. Iste incidunt ipsum illo perspiciatis praesentium! Maiores eius
-						adipisci dolores praesentium voluptas nihil, quos perferendis suscipit
-						similique quidem facilis veniam illo sit. Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Optio veritatis earum quibusdam sunt eum
-						tempora nesciunt? Recusandae, aut! Nostrum ipsum eveniet, odit modi
-						officia dolorem sequi obcaecati! Ratione, voluptas perferendis! Lorem
-						ipsum dolor sit amet consectetur adipisicing elit. Quaerat, eius. Non
-						saepe qui autem accusamus? Excepturi, recusandae. Labore id dolorem odit
-						totam placeat, similique voluptate a obcaecati, ipsum neque omnis.
-					</Text>
+					{!isLoading && about ? (
+						<>
+							<Text
+								color={"gray.700"}
+								lineHeight={"7"}
+								textAlign={"justify"}
+								noOfLines={9}
+							>
+								{about.body}
+							</Text>
+							<Link
+								_hover={{
+									textDecor: "none",
+									color: "pink.500",
+								}}
+							>
+								read more ...
+							</Link>
+						</>
+					) : (
+						<Text>Loading ...</Text>
+					)}
 				</Stack>
 			</Box>
 		</Flex>

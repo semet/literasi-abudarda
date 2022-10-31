@@ -6,11 +6,12 @@ import SecondaryHeaderContainer from "./head/SecondaryHeaderContainer";
 
 interface Props {
 	children: React.ReactNode;
+	title: string;
 }
-const LayoutSecondary: React.FC<Props> = ({ children }) => {
+const LayoutSecondary: React.FC<Props> = ({ children, title }) => {
 	return (
 		<Fragment>
-			<SecondaryHeaderContainer />
+			<SecondaryHeaderContainer title={title} />
 			{/* content */}
 			{children}
 			{/* Subscription Form */}

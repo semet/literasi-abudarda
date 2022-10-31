@@ -3,7 +3,7 @@ import React from "react";
 import HeaderShape from "../shape/HeaderShape";
 import HeaderTop from "./HeaderTop";
 
-const SecondaryHeaderContainer = () => {
+const SecondaryHeaderContainer: React.FC<{ title: string }> = ({ title }) => {
 	return (
 		<Box bgGradient={"linear(to-b, brand, brand)"} w={"full"} position={"relative"}>
 			{/* Header Top */}
@@ -17,7 +17,7 @@ const SecondaryHeaderContainer = () => {
 				pt={"10"}
 			>
 				<Stack align={"center"}>
-					<Heading color={"gray.50"}>Page Title</Heading>
+					<Heading color={"gray.50"}>{title}</Heading>
 					<Text>Subtitle</Text>
 				</Stack>
 			</Box>

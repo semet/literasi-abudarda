@@ -7,7 +7,7 @@ import MainCard from "../../components/non-fiction/MainCard";
 
 const NonFiction = () => {
 	return (
-		<LayoutSecondary>
+		<LayoutSecondary title={"Karya Non Fiksi"}>
 			<Head>
 				<title>Karangan Non-fiksi</title>
 			</Head>

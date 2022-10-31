@@ -1,17 +1,17 @@
 import { Box, Stack } from "@chakra-ui/react";
 import React from "react";
-import FavoriteFiction from "./widget/FavoriteFiction";
-import FictionArchive from "./widget/FictionArchive";
+import FavoriteNonFiction from "./widget/FavoriteNonFiction";
+import NonFictionArchive from "./widget/NonFictionArchive";
 import PopularAuthor from "./widget/PopularAuthor";
 
-const FictionSidebar = () => {
+const NonFictionSidebar = () => {
 	return (
 		<Box>
 			<Stack>
 				{/* Favorite */}
-				<FavoriteFiction />
+				<FavoriteNonFiction />
 				{/* Archive */}
-				<FictionArchive />
+				<NonFictionArchive />
 				{/* Popular Author */}
 				<PopularAuthor />
 			</Stack>
@@ -19,4 +19,4 @@ const FictionSidebar = () => {
 	);
 };
 
-export default FictionSidebar;
+export default NonFictionSidebar;
