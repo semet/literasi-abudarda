@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import {
 	AspectRatio,
 	Box,
@@ -7,21 +6,36 @@ import {
 	GridItem,
 	IconButton,
 	Image,
+	Text,
 } from "@chakra-ui/react";
-import SectionTitle from "../shared/SectionTitle";
+import { Fragment } from "react";
 import SectionSubTitle from "../shared/SectionSubTitle";
+import SectionTitle from "../shared/SectionTitle";
 
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation } from "swiper";
 
-import { FiArrowLeft, FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { Video } from "@prisma/client";
+
+import { useQuery } from "@tanstack/react-query";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const LatestVideo = () => {
+	const {
+		data: latestVideos,
+		isLoading,
+		isError,
+	} = useQuery<Video[]>(["latestVideos"], async () => {
+		const res = await fetch("/api/video/latest");
+		const data = await res.json();
+
+		return data;
+	});
 	return (
 		<Box
 			px={"4"}
 			py={"6"}
-			bg={"brand"}
+			bgGradient={"linear(to-b, brand, white)"}
 			// bgImage={"/images/shape/v748-toon-61.png"}
 			// bgSize={"cover"}
 			// bgRepeat={"no-repeat"}
@@ -34,83 +48,101 @@ const LatestVideo = () => {
 				</SectionSubTitle>
 			</Flex>
 			<Box w={"full"} pt={"6"}>
-				<Grid templateColumns="repeat(8, 1fr)" templateRows="repeat(2, 1fr)" gap={6}>
-					<GridItem
-						w="100%"
-						p={2}
-						bg="gray.50"
-						rounded={"lg"}
-						shadow={"md"}
-						colSpan={{ base: 8, md: 5 }}
-						rowSpan={2}
-					>
-						<AspectRatio ratio={{ base: 3 / 1.5, md: 4 / 2.6 }}>
-							{/* <iframe
-								src="https://www.youtube.com/embed/6HDc2mOSDbQ"
-								title="PROFIL PONDOK PESANTREN ABUDAR DA' LOMBOK TENGAH (Kpi Ummat TV)"
-								allowFullScreen
-								style={{
-									borderRadius: 5,
-								}}
-							/> */}
-							<Image
-								src={"/images/team/01.jpg"}
-								alt={"Image"}
-								objectFit={"cover"}
-							/>
-						</AspectRatio>
-					</GridItem>
-					<GridItem
-						w="100%"
-						p={2}
-						bg="gray.50"
-						rounded={"lg"}
-						shadow={"md"}
-						colSpan={{ base: 8, md: 3 }}
-					>
-						<AspectRatio ratio={{ base: 3 / 1.5, lg: 3 / 1.53, xl: 3 / 1.56 }}>
-							{/* <iframe
-								src="https://www.youtube.com/embed/19v0RKay4F8"
-								title="Egy Maulana -Suara Merdu Membaca Qur'an"
-								allowFullScreen
-								style={{
-									borderRadius: 5,
-								}}
-							/> */}
-							<Image
-								src={"/images/team/01.jpg"}
-								alt={"Image"}
-								objectFit={"cover"}
-							/>
-						</AspectRatio>
-					</GridItem>
-					<GridItem
-						w="100%"
-						p={2}
-						bg="gray.50"
-						rounded={"lg"}
-						shadow={"md"}
-						colSpan={{ base: 8, md: 3 }}
-					>
-						<AspectRatio ratio={{ base: 3 / 1.5, lg: 3 / 1.53, xl: 3 / 1.56 }}>
-							{/* <iframe
-								title="naruto"
-								src="https://www.youtube.com/embed/QhBnZ6NPOY0"
-								allowFullScreen
-								style={{
-									borderRadius: 5,
-								}}
-							/> */}
-							<Image
-								src={"/images/team/01.jpg"}
-								alt={"Image"}
-								objectFit={"cover"}
-							/>
-						</AspectRatio>
-					</GridItem>
-				</Grid>
-				{/* Slider */}
-				<VideoSlider />
+				{!isLoading ? (
+					<Fragment>
+						{latestVideos && (
+							<Fragment>
+								<Grid
+									templateColumns="repeat(8, 1fr)"
+									templateRows="repeat(2, 1fr)"
+									gap={6}
+								>
+									<GridItem
+										w="100%"
+										p={2}
+										bg="gray.50"
+										rounded={"lg"}
+										shadow={"md"}
+										colSpan={{ base: 8, md: 5 }}
+										rowSpan={2}
+									>
+										<AspectRatio ratio={{ base: 3 / 1.5, md: 4 / 2.6 }}>
+											<iframe
+												src={latestVideos[0].url}
+												title="PROFIL PONDOK PESANTREN ABUDAR DA' LOMBOK TENGAH (Kpi Ummat TV)"
+												allowFullScreen
+												style={{
+													borderRadius: 5,
+												}}
+											/>
+											{/* <Image
+												src={latestVideos[0].url}
+												alt={"Image"}
+												objectFit={"cover"}
+											/> */}
+										</AspectRatio>
+									</GridItem>
+									<GridItem
+										w="100%"
+										p={2}
+										bg="gray.50"
+										rounded={"lg"}
+										shadow={"md"}
+										colSpan={{ base: 8, md: 3 }}
+									>
+										<AspectRatio
+											ratio={{ base: 3 / 1.5, lg: 3 / 1.53, xl: 3 / 1.56 }}
+										>
+											<iframe
+												src={latestVideos[1].url}
+												title="Egy Maulana -Suara Merdu Membaca Qur'an"
+												allowFullScreen
+												style={{
+													borderRadius: 5,
+												}}
+											/>
+											{/* <Image
+												src={latestVideos[1].url}
+												alt={"Image"}
+												objectFit={"cover"}
+											/> */}
+										</AspectRatio>
+									</GridItem>
+									<GridItem
+										w="100%"
+										p={2}
+										bg="gray.50"
+										rounded={"lg"}
+										shadow={"md"}
+										colSpan={{ base: 8, md: 3 }}
+									>
+										<AspectRatio
+											ratio={{ base: 3 / 1.5, lg: 3 / 1.53, xl: 3 / 1.56 }}
+										>
+											<iframe
+												title="naruto"
+												src={latestVideos[2].url}
+												allowFullScreen
+												style={{
+													borderRadius: 5,
+												}}
+											/>
+											{/* <Image
+												src={latestVideos[2].url}
+												alt={"Image"}
+												objectFit={"cover"}
+											/> */}
+										</AspectRatio>
+									</GridItem>
+								</Grid>
+								{/* Slider */}
+								<VideoSlider videos={latestVideos} />
+							</Fragment>
+						)}
+					</Fragment>
+				) : (
+					<Text> Loading ...</Text>
+				)}
 			</Box>
 		</Box>
 	);
@@ -118,7 +150,7 @@ const LatestVideo = () => {
 
 export default LatestVideo;
 
-const VideoSlider = () => {
+const VideoSlider: React.FC<{ videos: Video[] }> = ({ videos }) => {
 	return (
 		<Swiper
 			modules={[Navigation]}
@@ -147,30 +179,30 @@ const VideoSlider = () => {
 				position: "relative",
 			}}
 		>
-			{Array(8)
-				.fill(0)
-				.map((_, i) => (
-					<SwiperSlide key={i}>
-						<Box
-							mt={"4"}
-							p={2}
-							w={"100%"}
-							bg={"gray.50"}
-							rounded={"md"}
-							shadow={"md"}
-							minW={"100px"}
-						>
-							<AspectRatio ratio={2 / 1}>
-								<Image
-									src={"/images/team/01.jpg"}
-									alt={"Image"}
-									objectFit={"cover"}
-									rounded={"md"}
-								/>
-							</AspectRatio>
-						</Box>
-					</SwiperSlide>
-				))}
+			{videos.slice(3).map((video, i) => (
+				<SwiperSlide key={i}>
+					<Box
+						mt={"4"}
+						p={2}
+						w={"100%"}
+						bg={"gray.50"}
+						rounded={"md"}
+						shadow={"md"}
+						minW={"100px"}
+					>
+						<AspectRatio ratio={2 / 1}>
+							<iframe
+								title="naruto"
+								src={video.url}
+								allowFullScreen
+								style={{
+									borderRadius: 5,
+								}}
+							/>
+						</AspectRatio>
+					</Box>
+				</SwiperSlide>
+			))}
 			<IconButton
 				aria-label="prev arrow"
 				icon={<FiArrowLeft />}

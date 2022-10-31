@@ -12,9 +12,10 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import { Menu, menus } from "./menu";
-
+import NextLink from "next/link";
 import { FiChevronRight } from "react-icons/fi";
 import useScroll from "../../hooks/useScroll";
+import ChakraNextLink from "../shared/ChakraNextLink";
 
 const DesktopMenu = () => {
 	return (
@@ -41,7 +42,7 @@ const MenuItems: React.FC<Menu> = (props) => {
 	return (
 		<Popover placement={"bottom-start"} trigger={"hover"}>
 			<PopoverTrigger>
-				<Link
+				<ChakraNextLink
 					_hover={{
 						textDecoration: "none",
 						color: `${isScrolled ? "brand" : "white"}`,
@@ -68,7 +69,7 @@ const MenuItems: React.FC<Menu> = (props) => {
 						transition={"all .3s ease"}
 					/>
 					{label}
-				</Link>
+				</ChakraNextLink>
 			</PopoverTrigger>
 			{subs && (
 				<PopoverContent
@@ -91,7 +92,7 @@ const SubMenu: React.FC<{ subs: Menu["subs"] }> = ({ subs }) => {
 	return (
 		<Stack>
 			{subs?.map((sub, index) => (
-				<Link
+				<ChakraNextLink
 					role={"group"}
 					_hover={{
 						textDecoration: "none",
@@ -134,7 +135,7 @@ const SubMenu: React.FC<{ subs: Menu["subs"] }> = ({ subs }) => {
 							<Icon color={"blue.400"} w={5} h={5} as={FiChevronRight} />
 						</Flex>
 					</Stack>
-				</Link>
+				</ChakraNextLink>
 			))}
 		</Stack>
 	);

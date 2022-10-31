@@ -1,13 +1,12 @@
 import { NextPage } from "next";
-import { AppContext } from "next/app";
 import Head from "next/head";
 import "swiper/css";
 import "swiper/css/navigation";
 import AboutSection from "../components/home/AboutSection";
-import LatestArticle from "../components/home/LatestArticle";
+import LatestFiction from "../components/home/LatestFiction";
+import LatestNonFiction from "../components/home/LatestNonFiction";
 import LatestVideo from "../components/home/LatestVideo";
 import PodcastSection from "../components/home/PodcastSection";
-import ShortStorySection from "../components/home/ShortStorySection";
 import TeamSection from "../components/home/TeamSection";
 import Layout from "../components/Layout";
 
@@ -17,16 +16,17 @@ const Home: NextPage = () => {
 			<Head>
 				<title>Abudardapedia</title>
 			</Head>
+
 			{/* About */}
 			<AboutSection />
 			{/* Latest Video */}
 			<LatestVideo />
 			{/* Podcast */}
-			<PodcastSection />
-			{/* Latest Article */}
-			<LatestArticle />
-			{/* Latest Short Story */}
-			<ShortStorySection />
+			{/* <PodcastSection /> */}
+			{/* Fiction Article */}
+			<LatestFiction />
+			{/*Non Fiction */}
+			<LatestNonFiction />
 			{/* Team */}
 			<TeamSection />
 			{/* News Letter */}

@@ -7,7 +7,6 @@ const SubscriptionForm = () => {
 	return (
 		<Box
 			bg={"brand"}
-			mx={"4"}
 			p={"4"}
 			display={"flex"}
 			flexDir={"column"}

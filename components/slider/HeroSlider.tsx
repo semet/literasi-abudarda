@@ -20,7 +20,7 @@ const HeroSlider = () => {
 					textAlign={{ base: "center", md: "left" }}
 					fontSize={{ base: "4xl", sm: "5xl", lg: "6xl" }}
 					fontWeight={"extrabold"}
-					bgGradient={"linear(to-r, blue.600, red.400)"}
+					bgGradient={"linear(to-r, blue.600, pink.400)"}
 					bgClip={"text"}
 					letterSpacing={"widest"}
 				>

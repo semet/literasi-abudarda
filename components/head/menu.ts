@@ -9,41 +9,33 @@ interface MenuItems {
 export const menus: Menu[] = [
 	{
 		label: "Home",
-		link: "#",
+		link: "/",
 	},
 	{
 		label: "Karya",
 		link: "#",
 		subs: [
 			{
-				label: "Cerpen",
-				link: "#",
+				label: "fiksi",
+				link: "/fiction",
 			},
 			{
-				label: "Ilmiah",
-				link: "#",
-			},
-			{
-				label: "Lain-lain",
-				link: "#",
+				label: "nonfiksi",
+				link: "/non-fiction",
 			},
 		],
 	},
 	{
-		label: "Bahasa",
-		link: "#",
-	},
-	{
-		label: "Sains",
+		label: "E-book",
 		link: "#",
 	},
 
 	{
-		label: "Digital",
+		label: "About",
 		link: "#",
 	},
 	{
-		label: "About",
+		label: "Donasi",
 		link: "#",
 	},
 ];

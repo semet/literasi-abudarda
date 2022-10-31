@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import {
 	Box,
-	Center,
 	Flex,
 	Heading,
 	Icon,
@@ -11,7 +10,6 @@ import {
 	Stack,
 	Text,
 } from "@chakra-ui/react";
-import React from "react";
 import {
 	FaCalendarAlt,
 	FaComment,
@@ -21,54 +19,8 @@ import {
 	FaUser,
 	FaWhatsapp,
 } from "react-icons/fa";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import { Navigation } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import ArticleShape from "../shape/ArticleShape";
-import SectionSubTitle from "../shared/SectionSubTitle";
-import SectionTitle from "../shared/SectionTitle";
 
-const LatestArticle = () => {
-	return (
-		<Box
-			px={"4"}
-			pt={"20"}
-			pb={"4"}
-			position={"relative"}
-			_before={{
-				content: "''",
-				position: "absolute",
-				width: "100%",
-				height: "100%",
-				top: "0",
-				left: "0",
-				bgGradient: "linear(to-b, cyan.400, blue.50)",
-				zIndex: "-1",
-			}}
-		>
-			{/* Shape */}
-			<ArticleShape />
-			<Flex flexDirection={"column"} alignItems={"center"} gap={6}>
-				<SectionTitle color={"blue.700"}>artikel</SectionTitle>
-				<Center maxW={"container.sm"} textAlign={"center"}>
-					<SectionSubTitle color={"gray.100"}>
-						Temukan artikel terbaru karya santri Abudada
-					</SectionSubTitle>
-				</Center>
-			</Flex>
-			{/* Featured Article */}
-			<FeaturedArticle />
-			{/* Article List */}
-			<Box py={"14"}>
-				<ArticleSlider />
-			</Box>
-		</Box>
-	);
-};
-
-export default LatestArticle;
-
-const FeaturedArticle = () => {
+const FeaturedFiction = () => {
 	return (
 		<Box px={{ base: "4", lg: "20" }} mt={"10"}>
 			<Flex
@@ -230,171 +182,4 @@ const FeaturedArticle = () => {
 	);
 };
 
-const ArticleSlider = () => {
-	return (
-		<Swiper
-			modules={[Navigation]}
-			autoplay={{
-				delay: 500,
-			}}
-			navigation={{
-				enabled: true,
-				prevEl: "#prevElement",
-				nextEl: "#nextElement",
-			}}
-			spaceBetween={20}
-			slidesPerView={4}
-			breakpoints={{
-				200: {
-					slidesPerView: 1,
-				},
-				768: {
-					slidesPerView: 2,
-					spaceBetween: 20,
-				},
-				992: {
-					slidesPerView: 3,
-					spaceBetween: 30,
-				},
-				1280: {
-					slidesPerView: 4,
-					spaceBetween: 30,
-				},
-			}}
-			style={{
-				width: "100%",
-			}}
-		>
-			{Array(8)
-				.fill(0)
-				.map((_, i) => (
-					<SwiperSlide key={i}>
-						<ArticleCard image={i + 1} />
-					</SwiperSlide>
-				))}
-			<IconButton
-				aria-label="prev arrow"
-				icon={<FiArrowLeft />}
-				colorScheme={"messenger"}
-				rounded={"full"}
-				position={"absolute"}
-				zIndex={"6"}
-				top={"45%"}
-				left={0}
-				id={"prevElement"}
-			/>
-			<IconButton
-				aria-label="next arrow"
-				icon={<FiArrowRight />}
-				colorScheme={"messenger"}
-				rounded={"full"}
-				position={"absolute"}
-				zIndex={"6"}
-				top={"45%"}
-				right={0}
-				id={"nextElement"}
-			/>
-		</Swiper>
-	);
-};
-
-const ArticleCard: React.FC<{ image: number }> = ({ image }) => {
-	return (
-		<Box
-			display={"flex"}
-			flexDir={"column"}
-			my={"4"}
-			w={"100%"}
-			bg={"white"}
-			rounded={"lg"}
-			shadow={"md"}
-			minW={"100px"}
-			role={"group"}
-			overflow={"hidden"}
-		>
-			<Box h={"300px"} overflow={"hidden"} position={"relative"}>
-				<Image
-					src={`/images/blog/travel/0${image}.jpg`}
-					alt={"Article 2"}
-					roundedTop={"md"}
-					w={"100%"}
-					_groupHover={{
-						transform: "scale(1.1)",
-					}}
-					transition={"all .25s ease"}
-				/>
-				<Flex
-					bottom={-10}
-					left={0}
-					position={"absolute"}
-					justifyContent={"center"}
-					gap={"4"}
-					w={"full"}
-					_groupHover={{
-						bottom: "2",
-					}}
-					transition={"all .5s ease-in-out"}
-				>
-					<IconButton
-						aria-label="share"
-						icon={<FaFacebookF />}
-						size={"sm"}
-						rounded={"full"}
-						colorScheme={"facebook"}
-					/>
-					<IconButton
-						aria-label="share"
-						icon={<FaTwitter />}
-						size={"sm"}
-						rounded={"full"}
-						colorScheme={"twitter"}
-					/>
-					<IconButton
-						aria-label="share"
-						icon={<FaPinterest />}
-						size={"sm"}
-						rounded={"full"}
-						colorScheme={"red"}
-					/>
-					<IconButton
-						aria-label="share"
-						icon={<FaWhatsapp />}
-						size={"sm"}
-						rounded={"full"}
-						colorScheme={"whatsapp"}
-					/>
-				</Flex>
-			</Box>
-			<Box p={"4"}>
-				<Stack gap={4}>
-					<Text
-						fontSize={{
-							base: "lg",
-							md: "xl",
-						}}
-						fontWeight={"bold"}
-						color={"gray.600"}
-						letterSpacing={"wide"}
-						lineHeight={"tall"}
-					>
-						Lorem ipsum dolor sit amet ctetur adipisicing elit.
-					</Text>
-					<Stack direction={"row"} align={"center"} gap={2}>
-						<Flex align={"center"} gap={2} color={"teal.700"}>
-							<Icon as={FaCalendarAlt} fontSize={"xs"} />
-							<Text fontSize={"xs"}>{new Date().toDateString()}</Text>
-						</Flex>
-						<Flex align={"center"} gap={2} color={"gray.600"}>
-							<Icon as={FaUser} fontSize={"xs"} />
-							<Text fontSize={"xs"}>Rifki</Text>
-						</Flex>
-						<Flex align={"center"} gap={2} color={"gray.600"}>
-							<Icon as={FaComment} fontSize={"xs"} />
-							<Text fontSize={"xs"}>10 Comments</Text>
-						</Flex>
-					</Stack>
-				</Stack>
-			</Box>
-		</Box>
-	);
-};
+export default FeaturedFiction;
