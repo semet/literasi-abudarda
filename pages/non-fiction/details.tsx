@@ -1,6 +1,5 @@
 import {
 	Box,
-	Button,
 	Divider,
 	Flex,
 	Heading,
@@ -12,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Head from "next/head";
-import React from "react";
 import {
 	FaCommentAlt,
 	FaRegCalendarAlt,
@@ -20,9 +18,6 @@ import {
 	FaThumbsUp,
 	FaUserAlt,
 } from "react-icons/fa";
-import FictionCommentSection from "../../components/fiction/FictionCommentSection";
-import FictionMainCard from "../../components/fiction/FictionMainCard";
-import FictionSidebar from "../../components/fiction/FictionSidebar";
 import LayoutSecondary from "../../components/LayoutSecondary";
 import NonFictionCommentSection from "../../components/non-fiction/NonFictionCommentSection";
 import NonFictionSidebar from "../../components/non-fiction/NonFictionSidebar";

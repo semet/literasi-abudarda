@@ -1,14 +1,23 @@
 import React, { Fragment } from "react";
 import { Box, Flex, IconButton, useBreakpointValue } from "@chakra-ui/react";
-import { FaFacebookF, FaYoutube, FaWhatsapp, FaAlignJustify } from "react-icons/fa";
+import {
+	FaFacebookF,
+	FaYoutube,
+	FaWhatsapp,
+	FaAlignJustify,
+	FaSignOutAlt,
+} from "react-icons/fa";
 import useScroll from "../../hooks/useScroll";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSession, signOut } from "next-auth/react";
 const RightMenu = () => {
 	const screen = useBreakpointValue({
 		base: "base",
 		lg: "lg",
 	});
 	const { isScrolled } = useScroll();
+
+	const { data, status } = useSession();
 	return (
 		<AnimatePresence>
 			{screen === "lg" ? (
@@ -43,6 +52,17 @@ const RightMenu = () => {
 						fontSize={"lg"}
 						size={"sm"}
 					/>
+					{status !== "unauthenticated" && status !== "loading" && (
+						<IconButton
+							aria-label="logout"
+							colorScheme={"pink"}
+							icon={<FaSignOutAlt />}
+							rounded={"full"}
+							fontSize={"lg"}
+							size={"sm"}
+							onClick={() => signOut()}
+						/>
+					)}
 				</Flex>
 			) : (
 				<IconButton

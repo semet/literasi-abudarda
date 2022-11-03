@@ -5,12 +5,13 @@ import {
 	Icon,
 	IconButton,
 	Image,
-	Link,
 	Stack,
 	StackDivider,
 	Text,
 } from "@chakra-ui/react";
+import { FictionArticleWithDetails } from "common";
 import React from "react";
+import ChakraNextLink from "../shared/ChakraNextLink";
 import {
 	FaCommentAlt,
 	FaFacebookF,
@@ -21,9 +22,11 @@ import {
 	FaWhatsapp,
 } from "react-icons/fa";
 
-const FictionMainCard = () => {
+const FictionMainCard: React.FC<{ article: FictionArticleWithDetails }> = ({
+	article,
+}) => {
 	return (
-		<Box w={"full"} role={"group"}>
+		<Box w={"full"} role={"group"} mb={6}>
 			<Flex
 				shadow={"lg"}
 				direction={{ base: "column", md: "row" }}
@@ -46,26 +49,34 @@ const FictionMainCard = () => {
 				<Box flex={1} bg={"#F5F5F5"} p={"4"}>
 					<Stack gap={4}>
 						{/* Post Title */}
-						<Heading
-							as={"h3"}
-							fontSize={{ base: "2xl", sm: "3xl" }}
+						<ChakraNextLink
 							color={"#364F6B"}
+							_hover={{
+								textDecor: "none",
+								color: "#FC5185",
+							}}
+							href={`/fiction/${article.id}`}
 						>
-							Lorem ipsum dolor sit amet consectetur adipisicing.
-						</Heading>
+							<Heading as={"h3"} fontSize={{ base: "2xl", sm: "3xl" }}>
+								{article.title}
+							</Heading>
+						</ChakraNextLink>
+
 						{/* Meta */}
 						<Stack direction={"row"} align={"center"} gap={2}>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
 								<Icon as={FaRegCalendarAlt} fontSize={"xs"} />
-								<Text fontSize={"xs"}>{new Date().toDateString()}</Text>
+								<Text fontSize={"xs"}>
+									{new Date(article.createdAt).toDateString()}
+								</Text>
 							</Flex>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
 								<Icon as={FaUserAlt} fontSize={"xs"} />
-								<Text fontSize={"xs"}>Rifki</Text>
+								<Text fontSize={"xs"}>{article.author.name}</Text>
 							</Flex>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
 								<Icon as={FaCommentAlt} fontSize={"xs"} />
-								<Text fontSize={"xs"}>10 Comments</Text>
+								<Text fontSize={"xs"}>{article._count.comments} Comments</Text>
 							</Flex>
 						</Stack>
 						{/* Summary */}
@@ -75,33 +86,20 @@ const FictionMainCard = () => {
 							textAlign={"justify"}
 							noOfLines={7}
 						>
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius non
-							dicta perferendis fugiat nisi. Voluptatum corporis aliquid facere
-							officia repellat, amet odio reprehenderit enim vero culpa odit
-							temporibus ex magnam. Lorem ipsum dolor sit amet consectetur
-							adipisicing elit. Saepe ipsum pariatur aliquam exercitationem
-							veritatis dolore cumque sit quidem dignissimos dolorum assumenda
-							similique nemo quasi aut, optio magnam odio ab animi. Lorem ipsum
-							dolor sit amet consectetur adipisicing elit. Est recusandae quod odio
-							voluptate praesentium! Molestias dignissimos nesciunt delectus
-							dolore, quam recusandae totam, perspiciatis molestiae quos nam iure
-							animi consectetur aliquam. Lorem ipsum dolor sit amet consectetur,
-							adipisicing elit. Iure possimus officiis illum dicta rerum harum
-							magnam facere adipisci magni ea quis provident, soluta, ipsam
-							architecto ut tenetur exercitationem fugiat doloribus!
+							{article.body}
 						</Text>
 						{/* Read more and buttons */}
 						<Flex justify={"space-between"}>
-							<Link
-								href={"#"}
+							<ChakraNextLink
 								color={"#FC5185"}
 								_hover={{
 									textDecor: "none",
 									color: "#364F6B",
 								}}
+								href={`/fiction/${article.id}`}
 							>
 								Read more ...
-							</Link>
+							</ChakraNextLink>
 							<Stack direction={"row"}>
 								<IconButton
 									aria-label="share"

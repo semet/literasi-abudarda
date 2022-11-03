@@ -1,12 +1,24 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Skeleton, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 import FictionMainCard from "../../components/fiction/FictionMainCard";
 import FictionSidebar from "../../components/fiction/FictionSidebar";
 import LayoutSecondary from "../../components/LayoutSecondary";
+import { useQuery } from "@tanstack/react-query";
+import { FictionArticleWithDetails } from "common";
 
 const FictionPage: NextPage<{}> = () => {
+	const {
+		data: allFictionArticles,
+		isLoading,
+		isError,
+	} = useQuery<FictionArticleWithDetails[]>(["allFictionArticles"], async () => {
+		const res = await fetch("/api/fiction/all");
+		const data = await res.json();
+
+		return data;
+	});
 	return (
 		<LayoutSecondary title={"Karya Fiksi"}>
 			<Head>
@@ -14,12 +26,16 @@ const FictionPage: NextPage<{}> = () => {
 			</Head>
 			<Box p={"4"}>
 				<Flex gap={12}>
-					<Box w={{ base: "full" }} experimental_spaceY={"6"}>
-						{Array(6)
-							.fill(0)
-							.map((_, i) => (
-								<FictionMainCard key={i} />
-							))}
+					<Box w={{ base: "full" }}>
+						<Skeleton isLoaded={!isLoading}>
+							{allFictionArticles !== undefined && (
+								<>
+									{allFictionArticles.map((article) => (
+										<FictionMainCard article={article} key={article.id} />
+									))}
+								</>
+							)}
+						</Skeleton>
 						<Flex justifyContent={"center"} mt={"6"}>
 							<Button size={"lg"} colorScheme={"pink"} rounded={"3xl"}>
 								Load more
