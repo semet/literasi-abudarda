@@ -1,10 +1,20 @@
 import { Box, Flex, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react";
+import { NonFictionArticleWithDetails } from "common";
 import React from "react";
-import { FaCommentAlt, FaRegCalendarAlt, FaUserAlt } from "react-icons/fa";
+import { FaCommentAlt, FaUserAlt } from "react-icons/fa";
+import ChakraNextLink from "../../shared/ChakraNextLink";
 
-const FavoriteCard = () => {
+const FavoriteCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({
+	article,
+}) => {
 	return (
-		<Box>
+		<ChakraNextLink
+			href={`/non-fiction/${article.id}`}
+			_hover={{
+				textDecor: "none",
+			}}
+			role={"group"}
+		>
 			<Flex>
 				<Box w={"20%"} overflow={"hidden"} roundedLeft={"base"}>
 					<Image
@@ -22,13 +32,16 @@ const FavoriteCard = () => {
 							fontSize={{ lg: "sm", xl: "lg" }}
 							color={"#364F6B"}
 							fontWeight={"semibold"}
+							_groupHover={{
+								color: "#FC5185",
+							}}
 						>
-							In exercitationem reprehenderit autem?
+							{article.title}
 						</Heading>
 						<Stack direction={"row"} align={"start"} gap={4}>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
 								<Icon as={FaCommentAlt} fontSize={"xs"} />
-								<Text fontSize={"xs"}>10</Text>
+								<Text fontSize={"xs"}>{article._count.comments}</Text>
 							</Flex>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
 								<Icon as={FaUserAlt} fontSize={"xs"} />
@@ -38,7 +51,7 @@ const FavoriteCard = () => {
 					</Stack>
 				</Box>
 			</Flex>
-		</Box>
+		</ChakraNextLink>
 	);
 };
 

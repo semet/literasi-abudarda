@@ -36,7 +36,7 @@ const NonFictionDetail: NextPage = () => {
 		isLoading,
 		isError,
 	} = useQuery<NonFictionArticleWithDetails>(
-		["nonFictionArticleDetails"],
+		["nonFictionArticleDetails", query.id],
 		async () => {
 			const res = await fetch(`/api/nonfiction/${query.id}`);
 			const data = await res.json();
@@ -50,7 +50,7 @@ const NonFictionDetail: NextPage = () => {
 	return (
 		<LayoutSecondary title={"Karya Fiksi"}>
 			<Head>
-				<title>Karya Fiksi</title>
+				<title>{article !== undefined ? article.title : "Artikel Nonfiksi"}</title>
 			</Head>
 			<Box p={"4"}>
 				<Flex gap={12}>

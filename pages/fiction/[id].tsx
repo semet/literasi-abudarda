@@ -54,7 +54,7 @@ const FictionDetail: NextPage = () => {
 	return (
 		<LayoutSecondary title={"Karya Fiksi"}>
 			<Head>
-				<title>Karya Fiksi</title>
+				<title>{article !== undefined ? article.title : "Artikel Fiksi"}</title>
 			</Head>
 			<Box p={"4"}>
 				<Flex gap={12}>
