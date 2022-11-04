@@ -58,52 +58,62 @@ const FictionDetail: NextPage = () => {
 			<Box p={"4"}>
 				<Flex gap={12}>
 					<Box w={{ base: "full" }}>
-						<Skeleton isLoaded={!isLoading}>
-							{article !== undefined && (
-								<Stack
-									rounded={"md"}
-									overflow={"hidden"}
-									gap={6}
-									bg={"white"}
-									boxShadow={"md"}
-								>
-									<Box maxH={"600px"} overflow={"hidden"} bg={"red"}>
-										<Image
-											src={article.image}
-											alt={"Detail"}
-											objectFit={"cover"}
-											w={"full"}
-										/>
-									</Box>
-									<Stack gap={4} p={4}>
-										<Heading>{article.title}</Heading>
-										<Stack direction={"row"} align={"center"} gap={2}>
-											<Flex align={"center"} gap={2} color={"gray.500"}>
-												<Icon as={FaRegCalendarAlt} fontSize={"xs"} />
-												<Text fontSize={"xs"}>
-													{new Date(article.createdAt).toDateString()}
-												</Text>
-											</Flex>
-											<Flex align={"center"} gap={2} color={"gray.500"}>
-												<Icon as={FaUserAlt} fontSize={"xs"} />
-												<Text fontSize={"xs"}>{article.author.name}</Text>
-											</Flex>
-											<Flex align={"center"} gap={2} color={"gray.500"}>
-												<Icon as={FaCommentAlt} fontSize={"xs"} />
-												<Text fontSize={"xs"}>
-													{article._count.comments} Comments
-												</Text>
-											</Flex>
-										</Stack>
+						{isLoading && (
+							<Stack>
+								<Skeleton h={"400px"} rounded={"lg"} />
+								{Array(3)
+									.fill(0)
+									.map((_, i) => (
+										<Skeleton h={"6"} rounded={"lg"} key={i} />
+									))}
 
-										<Text textAlign={"justify"}>{article.body}</Text>
-										<Divider variant={"solid"} />
-										{/* CommentSection */}
-										<FictionCommentSection articleId={article.id} />
+								<Skeleton h={"200px"} w={"60%"} rounded={"lg"} />
+							</Stack>
+						)}
+						{article !== undefined && (
+							<Stack
+								rounded={"md"}
+								overflow={"hidden"}
+								gap={6}
+								bg={"white"}
+								boxShadow={"md"}
+							>
+								<Box maxH={"600px"} overflow={"hidden"} bg={"red"}>
+									<Image
+										src={article.image}
+										alt={"Detail"}
+										objectFit={"cover"}
+										w={"full"}
+									/>
+								</Box>
+								<Stack gap={4} p={4}>
+									<Heading>{article.title}</Heading>
+									<Stack direction={"row"} align={"center"} gap={2}>
+										<Flex align={"center"} gap={2} color={"gray.500"}>
+											<Icon as={FaRegCalendarAlt} fontSize={"xs"} />
+											<Text fontSize={"xs"}>
+												{new Date(article.createdAt).toDateString()}
+											</Text>
+										</Flex>
+										<Flex align={"center"} gap={2} color={"gray.500"}>
+											<Icon as={FaUserAlt} fontSize={"xs"} />
+											<Text fontSize={"xs"}>{article.author.name}</Text>
+										</Flex>
+										<Flex align={"center"} gap={2} color={"gray.500"}>
+											<Icon as={FaCommentAlt} fontSize={"xs"} />
+											<Text fontSize={"xs"}>
+												{article._count.comments} Comments
+											</Text>
+										</Flex>
 									</Stack>
+
+									<Text textAlign={"justify"}>{article.body}</Text>
+									<Divider variant={"solid"} />
+									{/* CommentSection */}
+									<FictionCommentSection articleId={article.id} />
 								</Stack>
-							)}
-						</Skeleton>
+							</Stack>
+						)}
 					</Box>
 					<Box display={{ base: "none", lg: "flex" }} w={"30%"}>
 						{/* Sidebar */}
