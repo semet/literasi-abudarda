@@ -4,6 +4,7 @@ declare module "common" {
 		Cerpen,
 		FictionArticle,
 		FictionComment,
+		NonFictionArticle,
 		NonFictionComment,
 		User,
 	} from "@prisma/client";
@@ -19,6 +20,11 @@ declare module "common" {
 	type FictionArticleWithDetails = FictionArticle & {
 		author: Author;
 		_count: Prisma.FictionArticleCountOutputType;
+	};
+
+	type NonFictionArticleWithDetails = NonFictionArticle & {
+		author: Author;
+		_count: Prisma.NonFictionArticleCountOutputType;
 	};
 
 	type FictionCommentWithUser = FictionComment & {

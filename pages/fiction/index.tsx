@@ -1,15 +1,14 @@
-import { Box, Button, Flex, Skeleton, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Skeleton } from "@chakra-ui/react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { FictionArticleWithDetails } from "common";
 import { NextPage } from "next";
 import Head from "next/head";
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import FictionMainCard from "../../components/fiction/FictionMainCard";
 import FictionSidebar from "../../components/fiction/FictionSidebar";
 import LayoutSecondary from "../../components/LayoutSecondary";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { FictionArticleWithDetails } from "common";
 
 const FictionPage: NextPage<{}> = () => {
-	const [skip, setSkip] = useState(0);
 	const {
 		isLoading,
 		isError,

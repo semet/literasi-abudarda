@@ -10,6 +10,7 @@ import {
 	Stack,
 	Text,
 } from "@chakra-ui/react";
+import { NonFictionArticleWithDetails } from "common";
 import React from "react";
 import {
 	FaCommentAlt,
@@ -20,8 +21,9 @@ import {
 	FaUserAlt,
 	FaWhatsapp,
 } from "react-icons/fa";
+import ChakraNextLink from "../shared/ChakraNextLink";
 
-const MainCard = () => {
+const MainCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({ article }) => {
 	return (
 		<GridItem w={"full"}>
 			<Stack bg={"gray.100"} rounded={"lg"} overflow={"hidden"}>
@@ -36,26 +38,33 @@ const MainCard = () => {
 				<Box maxH={"400px"} p={4}>
 					<Stack gap={4}>
 						{/* Post Title */}
-						<Heading
-							as={"h3"}
-							fontSize={{ base: "2xl", sm: "3xl" }}
+						<ChakraNextLink
+							href={`/non-fiction/${article.id}`}
 							color={"#364F6B"}
+							_hover={{
+								textDecor: "none",
+								color: "#FC5185",
+							}}
 						>
-							Lorem ipsum dolor sit amet consectetur adipisicing.
-						</Heading>
+							<Heading as={"h3"} fontSize={{ base: "2xl", sm: "3xl" }}>
+								{article.title}
+							</Heading>
+						</ChakraNextLink>
 						{/* Meta */}
 						<Stack direction={"row"} align={"center"} gap={4}>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
 								<Icon as={FaRegCalendarAlt} fontSize={"sm"} />
-								<Text fontSize={"sm"}>{new Date().toDateString()}</Text>
+								<Text fontSize={"sm"}>
+									{new Date(article.createdAt).toDateString()}
+								</Text>
 							</Flex>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
 								<Icon as={FaUserAlt} fontSize={"sm"} />
-								<Text fontSize={"sm"}>Rifki</Text>
+								<Text fontSize={"sm"}>{article.author.name}</Text>
 							</Flex>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
 								<Icon as={FaCommentAlt} fontSize={"sm"} />
-								<Text fontSize={"sm"}>10 Comments</Text>
+								<Text fontSize={"sm"}>{article._count.comments} Comments</Text>
 							</Flex>
 						</Stack>
 						{/* Summary */}
@@ -82,8 +91,8 @@ const MainCard = () => {
 						</Text>
 						{/* Read more and buttons */}
 						<Flex justify={"space-between"}>
-							<Link
-								href={"#"}
+							<ChakraNextLink
+								href={`/non-fiction/${article.id}`}
 								color={"#FC5185"}
 								_hover={{
 									textDecor: "none",
@@ -91,7 +100,7 @@ const MainCard = () => {
 								}}
 							>
 								Read more ...
-							</Link>
+							</ChakraNextLink>
 							<Stack direction={"row"}>
 								<IconButton
 									aria-label="share"
