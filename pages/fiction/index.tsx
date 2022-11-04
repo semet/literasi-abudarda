@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Skeleton } from "@chakra-ui/react";
+import { Box, Button, Flex, Skeleton, SkeletonText, Stack } from "@chakra-ui/react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { FictionArticleWithDetails } from "common";
 import { NextPage } from "next";
@@ -48,16 +48,23 @@ const FictionPage: NextPage<{}> = () => {
 			<Box p={"4"}>
 				<Flex gap={12}>
 					<Box w={{ base: "full" }}>
-						<Skeleton isLoaded={data !== undefined || !isFetchingNextPage}>
-							{data &&
-								data.pages.map((page, index) => (
-									<Fragment key={index}>
-										{page.posts.map((post) => (
-											<FictionMainCard article={post} key={post.id} />
-										))}
-									</Fragment>
-								))}
-						</Skeleton>
+						{isLoading && (
+							<Stack>
+								{Array(2)
+									.fill(0)
+									.map((_, i) => (
+										<Skeleton h={"350px"} rounded={"lg"} key={i} />
+									))}
+							</Stack>
+						)}
+						{data &&
+							data.pages.map((page, index) => (
+								<Fragment key={index}>
+									{page.posts.map((post) => (
+										<FictionMainCard article={post} key={post.id} />
+									))}
+								</Fragment>
+							))}
 
 						<Flex justifyContent={"center"} mt={"6"}>
 							<Button

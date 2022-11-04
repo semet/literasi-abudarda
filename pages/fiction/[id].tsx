@@ -8,6 +8,7 @@ import {
 	IconButton,
 	Image,
 	Skeleton,
+	SkeletonText,
 	Stack,
 	Text,
 } from "@chakra-ui/react";
@@ -38,7 +39,7 @@ const FictionDetail: NextPage = () => {
 		isLoading,
 		isError,
 	} = useQuery<FictionArticleWithDetails>(
-		["fictionArticleDetails"],
+		["fictionArticleDetails", query.id],
 		async () => {
 			const res = await fetch(`/api/fiction/${query.id}`);
 			const data = await res.json();
@@ -61,12 +62,7 @@ const FictionDetail: NextPage = () => {
 						{isLoading && (
 							<Stack>
 								<Skeleton h={"400px"} rounded={"lg"} />
-								{Array(3)
-									.fill(0)
-									.map((_, i) => (
-										<Skeleton h={"6"} rounded={"lg"} key={i} />
-									))}
-
+								<SkeletonText h={"6"} rounded={"lg"} />
 								<Skeleton h={"200px"} w={"60%"} rounded={"lg"} />
 							</Stack>
 						)}

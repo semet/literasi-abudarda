@@ -1,5 +1,4 @@
 import { Box, Stack } from "@chakra-ui/react";
-import React from "react";
 import FavoriteFiction from "./widget/FavoriteFiction";
 import FictionArchive from "./widget/FictionArchive";
 import PopularAuthor from "./widget/PopularAuthor";
