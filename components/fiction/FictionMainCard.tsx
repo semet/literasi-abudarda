@@ -35,7 +35,7 @@ const FictionMainCard: React.FC<{ article: FictionArticleWithDetails }> = ({
 			>
 				<Box w={{ base: "full", md: "40%" }} overflow={"hidden"}>
 					<Image
-						src={"/images/blog/travel/05.jpg"}
+						src={article.image}
 						alt={"Fictional Story"}
 						w={"100%"}
 						h={"100%"}

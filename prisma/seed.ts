@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 import { Prisma } from "@prisma/client";
 import { hashSync } from "bcrypt";
 
-const teamSed = async () => {
+const teamSeed = async () => {
 	const team: Prisma.TeamCreateManyInput[] = [];
 	for (let i = 0; i < 10; i++) {
 		const data: Prisma.TeamCreateManyInput = {
@@ -106,10 +106,30 @@ const nonFictionSeder = async () => {
 	}
 	await prisma.nonFictionArticle.createMany({ data: posts });
 };
-userSeed()
+
+const bookSeeder = async () => {
+	const categories = await prisma.category.findMany();
+	const books: Prisma.BookCreateManyInput[] = [];
+	for (let i = 0; i < 30; i++) {
+		const data: Prisma.BookCreateManyInput = {
+			categoryId: categories[Math.floor(Math.random() * categories.length)].id,
+			image: faker.image.unsplash.objects(),
+			isbn: faker.random.alphaNumeric().toUpperCase(),
+			sinopsis: faker.lorem.paragraphs(5),
+			title: faker.lorem.sentence(),
+		};
+
+		books.push(data);
+	}
+	await prisma.book.createMany({ data: books });
+};
+bookSeeder()
 	// .then(async () => await videoSeed())
 	// .then(async () => await authorSeed())
 	// .then(async () => await userSeed())
+	// .then(async () => await categorySeeder())
+	// .then(async () => await fiksiSeeder())
+	// .then(async () => await nonFictionSeder())
 	.catch((e) => {
 		console.error(e);
 		process.exit(1);

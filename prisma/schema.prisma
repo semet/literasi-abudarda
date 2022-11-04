@@ -80,8 +80,6 @@ model FictionArticle {
    id             String @id @default(uuid())
    title          String
    body           String @db.Text
-   like           Int?
-   dislike        Int?
    image          String
    author         Author @relation(fields: [authorId], references: [id])
    authorId       String
@@ -94,8 +92,6 @@ model NonFictionArticle {
    id             String @id @default(uuid())
    title          String
    body           String @db.Text
-   like           Int?
-   dislike        Int?
    image          String
    author         Author @relation(fields: [authorId], references: [id])
    authorId       String

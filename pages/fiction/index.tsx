@@ -1,24 +1,46 @@
-import { Box, Button, Flex, Skeleton, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Skeleton, Stack, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Head from "next/head";
-import React from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import FictionMainCard from "../../components/fiction/FictionMainCard";
 import FictionSidebar from "../../components/fiction/FictionSidebar";
 import LayoutSecondary from "../../components/LayoutSecondary";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { FictionArticleWithDetails } from "common";
 
 const FictionPage: NextPage<{}> = () => {
+	const [skip, setSkip] = useState(0);
 	const {
-		data: allFictionArticles,
 		isLoading,
 		isError,
-	} = useQuery<FictionArticleWithDetails[]>(["allFictionArticles"], async () => {
-		const res = await fetch("/api/fiction/all");
-		const data = await res.json();
+		data,
+		error,
+		isFetchingNextPage,
+		fetchNextPage,
+		hasNextPage,
+	} = useInfiniteQuery<{
+		nextId: string;
+		posts: FictionArticleWithDetails[];
+	}>(
+		["allFictionArticles"],
+		async ({ pageParam = "" }) => {
+			await new Promise((res) => setTimeout(res, 1000));
+			const res = await fetch("/api/fiction/all?cursor=" + pageParam);
+			const data = await res.json();
 
-		return data;
-	});
+			return data;
+		},
+		{
+			getNextPageParam: (lastPage: any) => lastPage.nextId ?? false,
+		}
+	);
+	//
+	const loadMore = () => {
+		if (hasNextPage) {
+			fetchNextPage();
+		}
+	};
+
 	return (
 		<LayoutSecondary title={"Karya Fiksi"}>
 			<Head>
@@ -27,18 +49,27 @@ const FictionPage: NextPage<{}> = () => {
 			<Box p={"4"}>
 				<Flex gap={12}>
 					<Box w={{ base: "full" }}>
-						<Skeleton isLoaded={!isLoading}>
-							{allFictionArticles !== undefined && (
-								<>
-									{allFictionArticles.map((article) => (
-										<FictionMainCard article={article} key={article.id} />
-									))}
-								</>
-							)}
+						<Skeleton isLoaded={data !== undefined || !isFetchingNextPage}>
+							{data &&
+								data.pages.map((page, index) => (
+									<Fragment key={index}>
+										{page.posts.map((post) => (
+											<FictionMainCard article={post} key={post.id} />
+										))}
+									</Fragment>
+								))}
 						</Skeleton>
+
 						<Flex justifyContent={"center"} mt={"6"}>
-							<Button size={"lg"} colorScheme={"pink"} rounded={"3xl"}>
-								Load more
+							<Button
+								size={"lg"}
+								colorScheme={"pink"}
+								rounded={"3xl"}
+								disabled={!hasNextPage}
+								isLoading={isFetchingNextPage}
+								onClick={loadMore}
+							>
+								{hasNextPage ? "Load more" : "No more"}
 							</Button>
 						</Flex>
 					</Box>
