@@ -114,9 +114,9 @@ const bookSeeder = async () => {
 		const data: Prisma.BookCreateManyInput = {
 			categoryId: categories[Math.floor(Math.random() * categories.length)].id,
 			image: faker.image.unsplash.objects(),
-			isbn: faker.random.alphaNumeric().toUpperCase(),
+			isbn: faker.random.word().toUpperCase(),
 			sinopsis: faker.lorem.paragraphs(5),
-			title: faker.lorem.sentence(),
+			title: faker.lorem.words(5),
 		};
 
 		books.push(data);

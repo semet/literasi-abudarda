@@ -5,9 +5,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 	const limit = 5;
 	const cursor = req.query.cursor ?? "";
 	const cursorObj = cursor === "" ? undefined : { id: cursor.toString() };
-
-	console.log("cursor", cursor);
-
 	try {
 		const posts = await prisma.fictionArticle.findMany({
 			orderBy: { createdAt: "desc" },

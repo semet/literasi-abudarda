@@ -5,6 +5,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import React, { Fragment } from "react";
 import EbookCard from "../../components/ebook/EbookCard";
+import EbookSidebar from "../../components/ebook/sidebar/EbookSidebar";
 import LayoutSecondary from "../../components/LayoutSecondary";
 
 const EbookPage: NextPage = () => {
@@ -82,8 +83,9 @@ const EbookPage: NextPage = () => {
 							</Button>
 						</Box>
 					</Box>
-					<Box display={{ base: "none", lg: "flex" }} w={"30%"} bg={"green"}>
+					<Box display={{ base: "none", lg: "flex" }} w={"30%"}>
 						{/* Sidebar */}
+						<EbookSidebar />
 					</Box>
 				</Flex>
 			</Box>
