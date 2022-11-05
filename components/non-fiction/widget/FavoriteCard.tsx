@@ -9,7 +9,7 @@ const FavoriteCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({
 }) => {
 	return (
 		<ChakraNextLink
-			href={`/non-fiction/${article.id}`}
+			href={`/non-fiction/${article.slug}`}
 			_hover={{
 				textDecor: "none",
 			}}

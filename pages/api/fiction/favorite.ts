@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../prisma/db";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
-	const skipped = (req.query.skippedId as string) ?? "";
+	const skipped = (req.query.skippedArticle as string) ?? "";
 	try {
 		const favorites = await prisma.fictionArticle.findMany({
 			orderBy: {
@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 				},
 			},
 			where: {
-				id: {
+				slug: {
 					not: skipped,
 				},
 			},

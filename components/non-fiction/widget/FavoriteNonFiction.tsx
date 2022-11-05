@@ -12,7 +12,7 @@ const FavoriteNonFiction = () => {
 	const { data, isLoading, isError } = useQuery<NonFictionArticleWithDetails[]>(
 		["favoriteNonfiction", query.slug],
 		async () => {
-			const res = await fetch(`/api/nonfiction/favorite?skippedId=${query.slug}`);
+			const res = await fetch(`/api/nonfiction/favorite?skippedArticle=${query.slug}`);
 			const data = await res.json();
 			return data;
 		},

@@ -17,6 +17,7 @@ const SocialShareButtons: React.FC<{
 		<Stack direction={"row"}>
 			<FacebookShareButton url={url} quote={title}>
 				<IconButton
+					as={"div"}
 					aria-label="share"
 					icon={<FaFacebookF />}
 					size={"sm"}
@@ -27,6 +28,7 @@ const SocialShareButtons: React.FC<{
 			</FacebookShareButton>
 			<TwitterShareButton url={url} title={title}>
 				<IconButton
+					as={"div"}
 					aria-label="share"
 					icon={<FaTwitter />}
 					size={"sm"}
@@ -37,6 +39,7 @@ const SocialShareButtons: React.FC<{
 			</TwitterShareButton>
 			<LinkedinShareButton url={url}>
 				<IconButton
+					as={"div"}
 					aria-label="share"
 					icon={<FaLinkedinIn />}
 					size={"sm"}
@@ -47,6 +50,7 @@ const SocialShareButtons: React.FC<{
 			</LinkedinShareButton>
 			<WhatsappShareButton url={url} title={title} separator=":: ">
 				<IconButton
+					as={"div"}
 					icon={<FaWhatsapp />}
 					aria-label="share"
 					size={"sm"}

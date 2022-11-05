@@ -1,68 +1,30 @@
-import {
-	Box,
-	Divider,
-	Flex,
-	Heading,
-	Icon,
-	IconButton,
-	Image,
-	Skeleton,
-	SkeletonText,
-	Stack,
-	Text,
-} from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+import { Box, Divider, Flex, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react";
 import { NonFictionArticleWithDetails } from "common";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { Fragment } from "react";
-import {
-	FaCommentAlt,
-	FaRegCalendarAlt,
-	FaThumbsDown,
-	FaThumbsUp,
-	FaUserAlt,
-} from "react-icons/fa";
+import { FaCommentAlt, FaRegCalendarAlt, FaUserAlt } from "react-icons/fa";
 import LayoutSecondary from "../../components/LayoutSecondary";
 import NonFictionCommentSection from "../../components/non-fiction/NonFictionCommentSection";
 import NonFictionSidebar from "../../components/non-fiction/NonFictionSidebar";
 import SocialShareButtons from "../../components/shared/SocialShareButtons";
 
-const NonFictionDetail: NextPage = () => {
-	const { query } = useRouter();
-	//
-	const {
-		data: article,
-		isLoading,
-		isError,
-	} = useQuery<NonFictionArticleWithDetails>(
-		["nonFictionArticleDetails", query.slug],
-		async () => {
-			const res = await fetch(`/api/nonfiction/${query.slug}`);
-			const data = await res.json();
-
-			return data;
-		},
-		{
-			enabled: query.slug !== undefined,
-		}
-	);
+const NonFictionDetail: NextPage<{ article: NonFictionArticleWithDetails }> = ({
+	article,
+}) => {
 	return (
 		<LayoutSecondary title={"Karya Fiksi"}>
 			<Head>
-				<title>{article !== undefined ? article.title : "Artikel Nonfiksi"}</title>
+				<title>{article.title}</title>
+				<meta property="og:title" content={article.title} />
+				<meta
+					property="og:url"
+					content={`${process.env.BASE_URL}/non-fiction/${article.slug}`}
+				/>
+				<meta property="og:image" content={article.image} />
 			</Head>
 			<Box p={"4"}>
 				<Flex gap={12}>
 					<Box w={{ base: "full" }}>
-						{isLoading && (
-							<Stack>
-								<Skeleton h={"400px"} rounded={"lg"} />
-								<SkeletonText h={"6"} rounded={"lg"} />
-								<Skeleton h={"200px"} w={"60%"} rounded={"lg"} />
-							</Stack>
-						)}
 						{article !== undefined && (
 							<Stack rounded={"md"} overflow={"hidden"} gap={6}>
 								<Box maxH={"600px"} overflow={"hidden"} bg={"red"}>
@@ -116,3 +78,16 @@ const NonFictionDetail: NextPage = () => {
 };
 
 export default NonFictionDetail;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const res = await fetch(
+		`http://localhost:3000/api/nonfiction/${context.params?.slug}`
+	);
+	const data = await res.json();
+
+	return {
+		props: {
+			article: JSON.parse(JSON.stringify(data)),
+		},
+	};
+};

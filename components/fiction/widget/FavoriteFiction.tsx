@@ -10,9 +10,9 @@ const FavoriteFiction = () => {
 	const { query } = useRouter();
 	//skip current opened article
 	const { data, isLoading, isError } = useQuery<FictionArticleWithDetails[]>(
-		["favoriteFiction", query.id],
+		["favoriteFiction", query.slug],
 		async () => {
-			const res = await fetch(`/api/fiction/favorite?skippedId=${query.id}`);
+			const res = await fetch(`/api/fiction/favorite?skippedArticle=${query.slug}`);
 			const data = await res.json();
 			return data;
 		}

@@ -27,8 +27,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 				},
 			},
 			where: {
-				id: {
-					not: req.query.skippedId as string,
+				slug: {
+					not: req.query.skippedArticle as string,
 				},
 			},
 		});
