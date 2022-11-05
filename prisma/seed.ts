@@ -79,6 +79,7 @@ const fiksiSeeder = async () => {
 	const posts: Prisma.FictionArticleCreateManyInput[] = [];
 	for (let i = 0; i < 30; i++) {
 		const data: Prisma.FictionArticleCreateManyInput = {
+			slug: faker.lorem.slug(4),
 			authorId: authors[Math.floor(Math.random() * authors.length)].id,
 			body: faker.lorem.paragraphs(6),
 			image: faker.image.nature(),
@@ -96,6 +97,7 @@ const nonFictionSeder = async () => {
 	const posts: Prisma.NonFictionArticleCreateManyInput[] = [];
 	for (let i = 0; i < 30; i++) {
 		const data: Prisma.NonFictionArticleCreateManyInput = {
+			slug: faker.lorem.slug(4),
 			authorId: authors[Math.floor(Math.random() * authors.length)].id,
 			categoryId: categories[Math.floor(Math.random() * categories.length)].id,
 			body: faker.lorem.paragraphs(6),
@@ -115,21 +117,22 @@ const bookSeeder = async () => {
 			categoryId: categories[Math.floor(Math.random() * categories.length)].id,
 			image: faker.image.unsplash.objects(),
 			isbn: faker.random.word().toUpperCase(),
-			sinopsis: faker.lorem.paragraphs(5),
 			title: faker.lorem.words(5),
+			url: "https://drive.google.com/file/d/1PPuyFb82e9j5QMlQbpOOThd5mEunmVJt/view",
 		};
 
 		books.push(data);
 	}
 	await prisma.book.createMany({ data: books });
 };
-bookSeeder()
-	// .then(async () => await videoSeed())
-	// .then(async () => await authorSeed())
-	// .then(async () => await userSeed())
-	// .then(async () => await categorySeeder())
-	// .then(async () => await fiksiSeeder())
-	// .then(async () => await nonFictionSeder())
+teamSeed()
+	.then(async () => await videoSeed())
+	.then(async () => await authorSeed())
+	.then(async () => await userSeed())
+	.then(async () => await categorySeeder())
+	.then(async () => await fiksiSeeder())
+	.then(async () => await nonFictionSeder())
+	.then(async () => await bookSeeder())
 	.catch((e) => {
 		console.error(e);
 		process.exit(1);

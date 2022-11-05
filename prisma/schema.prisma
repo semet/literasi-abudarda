@@ -78,6 +78,7 @@ model Category{
 
 model FictionArticle {
    id             String @id @default(uuid())
+   slug           String @unique
    title          String
    body           String @db.Text
    image          String
@@ -90,6 +91,7 @@ model FictionArticle {
 
 model NonFictionArticle {
    id             String @id @default(uuid())
+   slug           String @unique
    title          String
    body           String @db.Text
    image          String
@@ -126,12 +128,12 @@ model NonFictionComment {
 
 model Book {
    id             String @id @default(uuid())
-   isbn           String
+   isbn           String?
    category       Category @relation(fields: [categoryId], references: [id])
    categoryId     String
    title          String
    image          String
-   sinopsis       String @db.Text
+   url            String
    downloads      Int?
    like           Int?
    dislike        Int?
