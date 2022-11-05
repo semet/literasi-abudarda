@@ -1,12 +1,13 @@
 import { Box, Divider, Flex, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react";
 import { FictionArticleWithDetails } from "common";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { FaCommentAlt, FaRegCalendarAlt, FaUserAlt } from "react-icons/fa";
 import FictionCommentSection from "../../components/fiction/FictionCommentSection";
 import FictionSidebar from "../../components/fiction/FictionSidebar";
 import LayoutSecondary from "../../components/LayoutSecondary";
 import SocialShareButtons from "../../components/shared/SocialShareButtons";
+import { prisma } from "../../prisma/db";
 
 //todo: Change file name to [id].tsx
 const FictionDetail: NextPage<{ article: FictionArticleWithDetails }> = ({ article }) => {
@@ -82,13 +83,23 @@ const FictionDetail: NextPage<{ article: FictionArticleWithDetails }> = ({ artic
 
 export default FictionDetail;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const res = await fetch(`http://localhost:3000/api/fiction/${context.params?.slug}`);
-	const data = await res.json();
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+	const post = await prisma.fictionArticle.findUnique({
+		where: { slug: params!.slug as string },
+		include: {
+			_count: {
+				select: {
+					comments: true,
+				},
+			},
+			author: true,
+			comments: true,
+		},
+	});
 
 	return {
 		props: {
-			article: JSON.parse(JSON.stringify(data)),
+			article: JSON.parse(JSON.stringify(post)),
 		},
 	};
 };
