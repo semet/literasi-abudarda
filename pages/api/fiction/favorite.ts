@@ -13,7 +13,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 			take: 4,
 			select: {
 				id: true,
+				slug: true,
 				title: true,
+				image: true,
 				author: {
 					select: {
 						name: true,

@@ -40,7 +40,7 @@ const MainCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({ article
 					<Stack gap={4}>
 						{/* Post Title */}
 						<ChakraNextLink
-							href={`/non-fiction/${article.id}`}
+							href={`/non-fiction/${article.slug}`}
 							color={"#364F6B"}
 							_hover={{
 								textDecor: "none",
@@ -93,7 +93,7 @@ const MainCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({ article
 						{/* Read more and buttons */}
 						<Flex justify={"space-between"}>
 							<ChakraNextLink
-								href={`/non-fiction/${article.id}`}
+								href={`/non-fiction/${article.slug}`}
 								color={"#FC5185"}
 								_hover={{
 									textDecor: "none",

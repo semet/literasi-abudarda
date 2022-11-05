@@ -10,14 +10,14 @@ const FavoriteNonFiction = () => {
 	const { query } = useRouter();
 	//skip current opened article
 	const { data, isLoading, isError } = useQuery<NonFictionArticleWithDetails[]>(
-		["favoriteNonfiction", query.id],
+		["favoriteNonfiction", query.slug],
 		async () => {
-			const res = await fetch(`/api/nonfiction/favorite?skippedId=${query.id}`);
+			const res = await fetch(`/api/nonfiction/favorite?skippedId=${query.slug}`);
 			const data = await res.json();
 			return data;
 		},
 		{
-			enabled: query.id !== undefined,
+			enabled: query.slug !== undefined,
 		}
 	);
 	return (

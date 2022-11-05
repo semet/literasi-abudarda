@@ -62,7 +62,7 @@ const FictionMainCard: React.FC<{ article: FictionArticleWithDetails }> = ({
 								textDecor: "none",
 								color: "#FC5185",
 							}}
-							href={`/fiction/${article.id}`}
+							href={`/fiction/${article.slug}`}
 						>
 							<Heading as={"h3"} fontSize={{ base: "2xl", sm: "3xl" }}>
 								{article.title}
@@ -103,7 +103,7 @@ const FictionMainCard: React.FC<{ article: FictionArticleWithDetails }> = ({
 									textDecor: "none",
 									color: "#364F6B",
 								}}
-								href={`/fiction/${article.id}`}
+								href={`/fiction/${article.slug}`}
 							>
 								Read more ...
 							</ChakraNextLink>

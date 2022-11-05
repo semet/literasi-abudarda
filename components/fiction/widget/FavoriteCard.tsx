@@ -7,7 +7,7 @@ import ChakraNextLink from "../../shared/ChakraNextLink";
 const FavoriteCard: React.FC<{ article: FictionArticleWithDetails }> = ({ article }) => {
 	return (
 		<ChakraNextLink
-			href={`/fiction/${article.id}`}
+			href={`/fiction/${article.slug}`}
 			_hover={{
 				textDecor: "none",
 			}}
@@ -16,7 +16,7 @@ const FavoriteCard: React.FC<{ article: FictionArticleWithDetails }> = ({ articl
 			<Flex>
 				<Box w={"20%"} overflow={"hidden"} roundedLeft={"base"}>
 					<Image
-						src={"/images/blog/travel/01.jpg"}
+						src={article.image}
 						alt={"Fictional Story"}
 						w={"100%"}
 						h={"100%"}

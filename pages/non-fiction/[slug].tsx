@@ -37,15 +37,15 @@ const NonFictionDetail: NextPage = () => {
 		isLoading,
 		isError,
 	} = useQuery<NonFictionArticleWithDetails>(
-		["nonFictionArticleDetails", query.id],
+		["nonFictionArticleDetails", query.slug],
 		async () => {
-			const res = await fetch(`/api/nonfiction/${query.id}`);
+			const res = await fetch(`/api/nonfiction/${query.slug}`);
 			const data = await res.json();
 
 			return data;
 		},
 		{
-			enabled: query.id !== undefined,
+			enabled: query.slug !== undefined,
 		}
 	);
 	return (
