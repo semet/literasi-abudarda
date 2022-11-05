@@ -22,6 +22,7 @@ import {
 	FaWhatsapp,
 } from "react-icons/fa";
 import ChakraNextLink from "../shared/ChakraNextLink";
+import SocialShareButtons from "../shared/SocialShareButtons";
 
 const MainCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({ article }) => {
 	return (
@@ -101,40 +102,7 @@ const MainCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({ article
 							>
 								Read more ...
 							</ChakraNextLink>
-							<Stack direction={"row"}>
-								<IconButton
-									aria-label="share"
-									icon={<FaFacebookF />}
-									size={"sm"}
-									rounded={"full"}
-									colorScheme={"facebook"}
-									shadow={"lg"}
-								/>
-								<IconButton
-									aria-label="share"
-									icon={<FaTwitter />}
-									size={"sm"}
-									rounded={"full"}
-									colorScheme={"twitter"}
-									shadow={"lg"}
-								/>
-								<IconButton
-									aria-label="share"
-									icon={<FaPinterest />}
-									size={"sm"}
-									rounded={"full"}
-									colorScheme={"red"}
-									shadow={"lg"}
-								/>
-								<IconButton
-									aria-label="share"
-									icon={<FaWhatsapp />}
-									size={"sm"}
-									rounded={"full"}
-									colorScheme={"whatsapp"}
-									shadow={"lg"}
-								/>
-							</Stack>
+							<SocialShareButtons url={""} title={article.title} />
 						</Flex>
 					</Stack>
 				</Box>

@@ -64,7 +64,7 @@ const EbookPage: NextPage = () => {
 									<Fragment key={index}>
 										{page.books.map((book) => (
 											<GridItem w={"full"} key={book.id}>
-												<EbookCard />
+												<EbookCard book={book} />
 											</GridItem>
 										))}
 									</Fragment>

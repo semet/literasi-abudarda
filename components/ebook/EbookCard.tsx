@@ -1,8 +1,9 @@
 import { Box, Icon, IconButton, Image } from "@chakra-ui/react";
+import { Book } from "@prisma/client";
 import React from "react";
 import { FaDownload, FaEye } from "react-icons/fa";
 
-const EbookCard = () => {
+const EbookCard: React.FC<{ book: Book }> = ({ book }) => {
 	return (
 		<Box
 			w={"full"}
@@ -11,7 +12,7 @@ const EbookCard = () => {
 			role={"group"}
 			shadow={"md"}
 		>
-			<Image src={"/images/book/1.jpg"} alt={"some book"} objectFit={"cover"} />
+			<Image src={book.image} alt={"some book"} objectFit={"cover"} />
 			<Box
 				display={"flex"}
 				justifyContent={"center"}
@@ -33,13 +34,9 @@ const EbookCard = () => {
 					rounded={"full"}
 					colorScheme={"pink"}
 					shadow={"lg"}
-				/>
-				<IconButton
-					aria-label={"View"}
-					icon={<FaDownload />}
-					rounded={"full"}
-					colorScheme={"messenger"}
-					shadow={"lg"}
+					as={"a"}
+					href={book.url}
+					target={"_blank"}
 				/>
 			</Box>
 		</Box>

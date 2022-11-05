@@ -6,21 +6,28 @@ import {
 	IconButton,
 	Image,
 	Stack,
-	StackDivider,
 	Text,
 } from "@chakra-ui/react";
 import { FictionArticleWithDetails } from "common";
 import React from "react";
-import ChakraNextLink from "../shared/ChakraNextLink";
 import {
 	FaCommentAlt,
 	FaFacebookF,
-	FaPinterest,
+	FaLinkedinIn,
 	FaRegCalendarAlt,
 	FaTwitter,
 	FaUserAlt,
 	FaWhatsapp,
 } from "react-icons/fa";
+import ChakraNextLink from "../shared/ChakraNextLink";
+
+import {
+	FacebookShareButton,
+	LinkedinShareButton,
+	TwitterShareButton,
+	WhatsappShareButton,
+} from "next-share";
+import SocialShareButtons from "../shared/SocialShareButtons";
 
 const FictionMainCard: React.FC<{ article: FictionArticleWithDetails }> = ({
 	article,
@@ -100,40 +107,7 @@ const FictionMainCard: React.FC<{ article: FictionArticleWithDetails }> = ({
 							>
 								Read more ...
 							</ChakraNextLink>
-							<Stack direction={"row"}>
-								<IconButton
-									aria-label="share"
-									icon={<FaFacebookF />}
-									size={"sm"}
-									rounded={"full"}
-									colorScheme={"facebook"}
-									shadow={"lg"}
-								/>
-								<IconButton
-									aria-label="share"
-									icon={<FaTwitter />}
-									size={"sm"}
-									rounded={"full"}
-									colorScheme={"twitter"}
-									shadow={"lg"}
-								/>
-								<IconButton
-									aria-label="share"
-									icon={<FaPinterest />}
-									size={"sm"}
-									rounded={"full"}
-									colorScheme={"red"}
-									shadow={"lg"}
-								/>
-								<IconButton
-									aria-label="share"
-									icon={<FaWhatsapp />}
-									size={"sm"}
-									rounded={"full"}
-									colorScheme={"whatsapp"}
-									shadow={"lg"}
-								/>
-							</Stack>
+							<SocialShareButtons title={article.title} url={""} />
 						</Flex>
 					</Stack>
 				</Box>

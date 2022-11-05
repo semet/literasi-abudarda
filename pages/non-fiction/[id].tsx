@@ -27,6 +27,7 @@ import {
 import LayoutSecondary from "../../components/LayoutSecondary";
 import NonFictionCommentSection from "../../components/non-fiction/NonFictionCommentSection";
 import NonFictionSidebar from "../../components/non-fiction/NonFictionSidebar";
+import SocialShareButtons from "../../components/shared/SocialShareButtons";
 
 const NonFictionDetail: NextPage = () => {
 	const { query } = useRouter();
@@ -74,24 +75,27 @@ const NonFictionDetail: NextPage = () => {
 								</Box>
 								<Stack gap={4}>
 									<Heading>{article.title}</Heading>
-									<Stack direction={"row"} align={"center"} gap={2}>
-										<Flex align={"center"} gap={2} color={"gray.500"}>
-											<Icon as={FaRegCalendarAlt} fontSize={"xs"} />
-											<Text fontSize={"xs"}>
-												{new Date(article.createdAt).toDateString()}
-											</Text>
-										</Flex>
-										<Flex align={"center"} gap={2} color={"gray.500"}>
-											<Icon as={FaUserAlt} fontSize={"xs"} />
-											<Text fontSize={"xs"}>{article.author.name}</Text>
-										</Flex>
-										<Flex align={"center"} gap={2} color={"gray.500"}>
-											<Icon as={FaCommentAlt} fontSize={"xs"} />
-											<Text fontSize={"xs"}>
-												{article._count.comments} Comments
-											</Text>
-										</Flex>
-									</Stack>
+									<Flex justify={"space-between"} alignItems={"center"}>
+										<Stack direction={"row"} align={"center"} gap={2}>
+											<Flex align={"center"} gap={2} color={"gray.500"}>
+												<Icon as={FaRegCalendarAlt} fontSize={"xs"} />
+												<Text fontSize={"xs"}>
+													{new Date(article.createdAt).toDateString()}
+												</Text>
+											</Flex>
+											<Flex align={"center"} gap={2} color={"gray.500"}>
+												<Icon as={FaUserAlt} fontSize={"xs"} />
+												<Text fontSize={"xs"}>{article.author.name}</Text>
+											</Flex>
+											<Flex align={"center"} gap={2} color={"gray.500"}>
+												<Icon as={FaCommentAlt} fontSize={"xs"} />
+												<Text fontSize={"xs"}>
+													{article._count.comments} Comments
+												</Text>
+											</Flex>
+										</Stack>
+										<SocialShareButtons url={""} title={article.title} />
+									</Flex>
 
 									<Text textAlign={"justify"}>{article.body}</Text>
 									<Divider variant={"solid"} />

@@ -30,6 +30,13 @@ import LayoutSecondary from "../../components/LayoutSecondary";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { FictionArticleWithDetails } from "common";
+import {
+	FacebookShareButton,
+	LinkedinShareButton,
+	TwitterShareButton,
+	WhatsappShareButton,
+} from "next-share";
+import SocialShareButtons from "../../components/shared/SocialShareButtons";
 
 //todo: Change file name to [id].tsx
 const FictionDetail: NextPage = () => {
@@ -84,24 +91,27 @@ const FictionDetail: NextPage = () => {
 								</Box>
 								<Stack gap={4} p={4}>
 									<Heading>{article.title}</Heading>
-									<Stack direction={"row"} align={"center"} gap={2}>
-										<Flex align={"center"} gap={2} color={"gray.500"}>
-											<Icon as={FaRegCalendarAlt} fontSize={"xs"} />
-											<Text fontSize={"xs"}>
-												{new Date(article.createdAt).toDateString()}
-											</Text>
-										</Flex>
-										<Flex align={"center"} gap={2} color={"gray.500"}>
-											<Icon as={FaUserAlt} fontSize={"xs"} />
-											<Text fontSize={"xs"}>{article.author.name}</Text>
-										</Flex>
-										<Flex align={"center"} gap={2} color={"gray.500"}>
-											<Icon as={FaCommentAlt} fontSize={"xs"} />
-											<Text fontSize={"xs"}>
-												{article._count.comments} Comments
-											</Text>
-										</Flex>
-									</Stack>
+									<Flex justify={"space-between"} alignItems={"center"}>
+										<Stack direction={"row"} align={"center"} gap={2}>
+											<Flex align={"center"} gap={2} color={"gray.500"}>
+												<Icon as={FaRegCalendarAlt} fontSize={"xs"} />
+												<Text fontSize={"xs"}>
+													{new Date(article.createdAt).toDateString()}
+												</Text>
+											</Flex>
+											<Flex align={"center"} gap={2} color={"gray.500"}>
+												<Icon as={FaUserAlt} fontSize={"xs"} />
+												<Text fontSize={"xs"}>{article.author.name}</Text>
+											</Flex>
+											<Flex align={"center"} gap={2} color={"gray.500"}>
+												<Icon as={FaCommentAlt} fontSize={"xs"} />
+												<Text fontSize={"xs"}>
+													{article._count.comments} Comments
+												</Text>
+											</Flex>
+										</Stack>
+										<SocialShareButtons url={""} title={article.title} />
+									</Flex>
 
 									<Text textAlign={"justify"}>{article.body}</Text>
 									<Divider variant={"solid"} />
