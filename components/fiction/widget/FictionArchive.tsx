@@ -1,11 +1,11 @@
-import { Box, List, ListIcon, ListItem, Stack } from "@chakra-ui/react";
+import { Box, List, ListIcon, ListItem, Skeleton, Stack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { Fragment } from "react";
 import { FaCalendar } from "react-icons/fa";
 import SidebarTitle from "../../shared/SidebarTitle";
 
 const FictionArchive = () => {
-	const { data } = useQuery<
+	const { data, isLoading, isError } = useQuery<
 		{
 			createdAt: string;
 			_count: {
@@ -22,6 +22,15 @@ const FictionArchive = () => {
 		<Box bg={"#F4EEFF"} p={4} rounded={"lg"}>
 			<Stack gap={4}>
 				<SidebarTitle title={"Arsip"} />
+				{isLoading && (
+					<Stack>
+						{Array(4)
+							.fill(0)
+							.map((_, i) => (
+								<Skeleton h={"16"} rounded={"md"} key={i} />
+							))}
+					</Stack>
+				)}
 				<List spacing={3}>
 					{data && (
 						<Fragment>

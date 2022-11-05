@@ -18,7 +18,7 @@ const FavoriteCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({
 			<Flex>
 				<Box w={"20%"} overflow={"hidden"} roundedLeft={"base"}>
 					<Image
-						src={"/images/blog/travel/01.jpg"}
+						src={article.image}
 						alt={"Fictional Story"}
 						w={"100%"}
 						h={"100%"}
