@@ -7,6 +7,7 @@ import LayoutSecondary from "../../components/LayoutSecondary";
 import NonFictionCommentSection from "../../components/non-fiction/NonFictionCommentSection";
 import NonFictionSidebar from "../../components/non-fiction/NonFictionSidebar";
 import SocialShareButtons from "../../components/shared/SocialShareButtons";
+import { prisma } from "../../prisma/db";
 
 const NonFictionDetail: NextPage<{ article: NonFictionArticleWithDetails }> = ({
 	article,
@@ -79,15 +80,23 @@ const NonFictionDetail: NextPage<{ article: NonFictionArticleWithDetails }> = ({
 
 export default NonFictionDetail;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const res = await fetch(
-		`http://localhost:3000/api/nonfiction/${context.params?.slug}`
-	);
-	const data = await res.json();
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+	const post = await prisma.nonFictionArticle.findUnique({
+		where: { slug: params!.slug as string },
+		include: {
+			_count: {
+				select: {
+					comments: true,
+				},
+			},
+			author: true,
+			comments: true,
+		},
+	});
 
 	return {
 		props: {
-			article: JSON.parse(JSON.stringify(data)),
+			article: JSON.parse(JSON.stringify(post)),
 		},
 	};
 };
