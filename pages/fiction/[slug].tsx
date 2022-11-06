@@ -42,7 +42,11 @@ const FictionDetail: NextPage<{ article: FictionArticleWithDetails }> = ({ artic
 							</Box>
 							<Stack gap={4} p={4}>
 								<Heading>{article.title}</Heading>
-								<Flex justify={"space-between"} alignItems={"center"}>
+								<Flex
+									justify={"space-between"}
+									alignItems={"center"}
+									flexDir={{ base: "column", sm: "row" }}
+								>
 									<Stack direction={"row"} align={"center"} gap={2}>
 										<Flex align={"center"} gap={2} color={"gray.500"}>
 											<Icon as={FaRegCalendarAlt} fontSize={"xs"} />

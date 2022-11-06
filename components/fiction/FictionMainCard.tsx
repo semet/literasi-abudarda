@@ -81,7 +81,12 @@ const FictionMainCard: React.FC<{ article: FictionArticleWithDetails }> = ({
 								<Icon as={FaUserAlt} fontSize={"xs"} />
 								<Text fontSize={"xs"}>{article.author.name}</Text>
 							</Flex>
-							<Flex align={"center"} gap={2} color={"gray.500"}>
+							<Flex
+								align={"center"}
+								gap={2}
+								color={"gray.500"}
+								display={{ base: "none", sm: "flex" }}
+							>
 								<Icon as={FaCommentAlt} fontSize={"xs"} />
 								<Text fontSize={"xs"}>{article._count.comments} Comments</Text>
 							</Flex>
