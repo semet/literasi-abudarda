@@ -55,8 +55,50 @@ const FooterContainer = () => {
 								</List>
 							</Stack>
 						</GridItem>
-						<GridItem w={"100%"}>item 1</GridItem>
-						<GridItem w={"100%"}>item 1</GridItem>
+						<GridItem w={"100%"}>
+							<Text fontSize={"lg"} color={"gray.100"} textTransform={"uppercase"}>
+								KARYA
+							</Text>
+							<List spacing={3}>
+								{["Fiksi", "Non-fiksi", "Favorite ", "Archive"].map(
+									(data, idx) => (
+										<ListItem color={"white"} key={idx}>
+											<Link
+												href={""}
+												_hover={{
+													textDecor: "none",
+													color: "gray.200",
+												}}
+											>
+												<ListIcon as={FaAngleRight} color="white" />
+												{data}
+											</Link>
+										</ListItem>
+									)
+								)}
+							</List>
+						</GridItem>
+						<GridItem w={"100%"}>
+							<Text fontSize={"lg"} color={"gray.100"} textTransform={"uppercase"}>
+								Other
+							</Text>
+							<List spacing={3}>
+								{["Kontak", "Sitemap", "Location ", "Term"].map((data, idx) => (
+									<ListItem color={"white"} key={idx}>
+										<Link
+											href={""}
+											_hover={{
+												textDecor: "none",
+												color: "gray.200",
+											}}
+										>
+											<ListIcon as={FaAngleRight} color="white" />
+											{data}
+										</Link>
+									</ListItem>
+								))}
+							</List>
+						</GridItem>
 					</Grid>
 				</Box>
 			</Box>
