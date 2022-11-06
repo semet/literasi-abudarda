@@ -37,17 +37,7 @@ const SocialShareButtons: React.FC<{
 					shadow={"lg"}
 				/>
 			</TwitterShareButton>
-			<LinkedinShareButton url={url}>
-				<IconButton
-					as={"div"}
-					aria-label="share"
-					icon={<FaLinkedinIn />}
-					size={"sm"}
-					rounded={"full"}
-					colorScheme={"linkedin"}
-					shadow={"lg"}
-				/>
-			</LinkedinShareButton>
+
 			<WhatsappShareButton url={url} title={title} separator=":: ">
 				<IconButton
 					as={"div"}

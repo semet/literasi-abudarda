@@ -47,25 +47,30 @@ const MainCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({ article
 								color: "#FC5185",
 							}}
 						>
-							<Heading as={"h3"} fontSize={{ base: "2xl", sm: "3xl" }}>
+							<Heading as={"h3"} fontSize={{ base: "xl", sm: "3xl" }}>
 								{article.title}
 							</Heading>
 						</ChakraNextLink>
 						{/* Meta */}
-						<Stack direction={"row"} align={"center"} gap={4}>
+						<Stack direction={"row"} align={"center"} gap={2}>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
-								<Icon as={FaRegCalendarAlt} fontSize={"sm"} />
-								<Text fontSize={"sm"}>
+								<Icon as={FaRegCalendarAlt} fontSize={"xs"} />
+								<Text fontSize={"xs"}>
 									{new Date(article.createdAt).toDateString()}
 								</Text>
 							</Flex>
 							<Flex align={"center"} gap={2} color={"gray.500"}>
-								<Icon as={FaUserAlt} fontSize={"sm"} />
-								<Text fontSize={"sm"}>{article.author.name}</Text>
+								<Icon as={FaUserAlt} fontSize={"xs"} />
+								<Text fontSize={"xs"}>{article.author.name}</Text>
 							</Flex>
-							<Flex align={"center"} gap={2} color={"gray.500"}>
-								<Icon as={FaCommentAlt} fontSize={"sm"} />
-								<Text fontSize={"sm"}>{article._count.comments} Comments</Text>
+							<Flex
+								align={"center"}
+								gap={2}
+								color={"gray.500"}
+								display={{ base: "none", sm: "flex" }}
+							>
+								<Icon as={FaCommentAlt} fontSize={"xs"} />
+								<Text fontSize={"xs"}>{article._count.comments} Comments</Text>
 							</Flex>
 						</Stack>
 						{/* Summary */}
