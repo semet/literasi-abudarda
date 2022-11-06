@@ -4,7 +4,10 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FictionCard from "./FictionCard";
-const FictionSlider = () => {
+import { FictionArticleWithDetails } from "common";
+const FictionSlider: React.FC<{ article: FictionArticleWithDetails[] }> = ({
+	article,
+}) => {
 	return (
 		<Swiper
 			modules={[Navigation]}
@@ -39,13 +42,11 @@ const FictionSlider = () => {
 				width: "100%",
 			}}
 		>
-			{Array(8)
-				.fill(0)
-				.map((_, i) => (
-					<SwiperSlide key={i}>
-						<FictionCard image={i + 1} />
-					</SwiperSlide>
-				))}
+			{article.map((article) => (
+				<SwiperSlide key={article.id}>
+					<FictionCard article={article} />
+				</SwiperSlide>
+			))}
 			<IconButton
 				aria-label="prev arrow"
 				icon={<FiArrowLeft />}

@@ -1,8 +1,18 @@
-import { Box, Flex, Image, Link, Stack, Text } from "@chakra-ui/react";
+import {
+	Box,
+	Flex,
+	Image,
+	Link,
+	Skeleton,
+	SkeletonText,
+	Stack,
+	Text,
+} from "@chakra-ui/react";
 import { About } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import SectionSubTitle from "../shared/SectionSubTitle";
 import SectionTitle from "../shared/SectionTitle";
+import { Fragment } from "react";
 
 const AboutSection = () => {
 	const {
@@ -48,8 +58,14 @@ const AboutSection = () => {
 					<SectionSubTitle color="gray.500">
 						Kenapa sih kami sampe bisa ada d sini dan membangun semua ini?
 					</SectionSubTitle>
-					{!isLoading && about ? (
-						<>
+					{isLoading && (
+						<Stack spacing={4}>
+							<SkeletonText />
+							<SkeletonText />
+						</Stack>
+					)}
+					{about && (
+						<Fragment>
 							<Text
 								color={"gray.700"}
 								lineHeight={"7"}
@@ -66,9 +82,7 @@ const AboutSection = () => {
 							>
 								read more ...
 							</Link>
-						</>
-					) : (
-						<Text>Loading ...</Text>
+						</Fragment>
 					)}
 				</Stack>
 			</Box>

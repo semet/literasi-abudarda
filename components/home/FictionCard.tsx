@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Box, Flex, Icon, IconButton, Image, Stack, Text } from "@chakra-ui/react";
+import { FictionArticleWithDetails } from "common";
 import {
 	FaCalendarAlt,
 	FaComment,
@@ -9,26 +10,26 @@ import {
 	FaUser,
 	FaWhatsapp,
 } from "react-icons/fa";
+import ChakraNextLink from "../shared/ChakraNextLink";
 
-const FictionCard: React.FC<{ image: number }> = ({ image }) => {
+const FictionCard: React.FC<{ article: FictionArticleWithDetails }> = ({ article }) => {
 	return (
-		<Box
-			display={"flex"}
-			flexDir={"column"}
+		<Stack
 			my={"4"}
 			w={"100%"}
 			bg={"white"}
 			rounded={"lg"}
 			shadow={"md"}
-			minW={"100px"}
+			maxH={"450px"}
 			role={"group"}
 			overflow={"hidden"}
 		>
-			<Box h={"300px"} overflow={"hidden"} position={"relative"}>
+			<Box overflow={"hidden"} position={"relative"} bg={"red"}>
 				<Image
-					src={`/images/blog/travel/0${image}.jpg`}
+					src={article.image}
 					alt={"Article 2"}
 					roundedTop={"md"}
+					objectFit={"contain"}
 					w={"100%"}
 					_groupHover={{
 						transform: "scale(1.1)",
@@ -77,7 +78,7 @@ const FictionCard: React.FC<{ image: number }> = ({ image }) => {
 					/>
 				</Flex>
 			</Box>
-			<Box p={"4"}>
+			<Box p={"4"} flex={1}>
 				<Stack gap={4}>
 					<Text
 						fontSize={{
@@ -89,25 +90,40 @@ const FictionCard: React.FC<{ image: number }> = ({ image }) => {
 						letterSpacing={"wide"}
 						lineHeight={"tall"}
 					>
-						Lorem ipsum dolor sit amet ctetur adipisicing elit.
+						<ChakraNextLink
+							href={`/fiction/${article.slug}`}
+							_hover={{
+								textDecor: "none",
+								color: "#FC5185",
+							}}
+						>
+							{article.title}
+						</ChakraNextLink>
 					</Text>
 					<Stack direction={"row"} align={"center"} gap={2}>
 						<Flex align={"center"} gap={2} color={"teal.700"}>
 							<Icon as={FaCalendarAlt} fontSize={"xs"} />
-							<Text fontSize={"xs"}>{new Date().toDateString()}</Text>
+							<Text fontSize={"xs"}>
+								{new Date(article.createdAt).toDateString()}
+							</Text>
 						</Flex>
 						<Flex align={"center"} gap={2} color={"gray.600"}>
 							<Icon as={FaUser} fontSize={"xs"} />
-							<Text fontSize={"xs"}>Rifki</Text>
+							<Text fontSize={"xs"}>{article.author.name}</Text>
 						</Flex>
-						<Flex align={"center"} gap={2} color={"gray.600"}>
+						<Flex
+							align={"center"}
+							gap={2}
+							color={"gray.600"}
+							display={{ base: "flex", lg: "none" }}
+						>
 							<Icon as={FaComment} fontSize={"xs"} />
-							<Text fontSize={"xs"}>10 Comments</Text>
+							<Text fontSize={"xs"}>{article._count.comments} Comments</Text>
 						</Flex>
 					</Stack>
 				</Stack>
 			</Box>
-		</Box>
+		</Stack>
 	);
 };
 

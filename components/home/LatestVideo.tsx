@@ -19,6 +19,7 @@ import { Video } from "@prisma/client";
 
 import { useQuery } from "@tanstack/react-query";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import LatestVideoSkeleton from "./LatestVideoSkeleton";
 
 const LatestVideo = () => {
 	const {
@@ -48,100 +49,80 @@ const LatestVideo = () => {
 				</SectionSubTitle>
 			</Flex>
 			<Box w={"full"} pt={"6"}>
-				{!isLoading ? (
+				{isLoading && <LatestVideoSkeleton />}
+				{latestVideos && (
 					<Fragment>
-						{latestVideos && (
-							<Fragment>
-								<Grid
-									templateColumns="repeat(8, 1fr)"
-									templateRows="repeat(2, 1fr)"
-									gap={6}
+						<Grid
+							templateColumns="repeat(8, 1fr)"
+							templateRows="repeat(2, 1fr)"
+							gap={6}
+						>
+							<GridItem
+								w="100%"
+								p={2}
+								bg="gray.50"
+								rounded={"lg"}
+								shadow={"md"}
+								colSpan={{ base: 8, md: 5 }}
+								rowSpan={2}
+							>
+								<AspectRatio ratio={{ base: 3 / 1.5, md: 4 / 2.6 }}>
+									<iframe
+										src={latestVideos[0].url}
+										title="PROFIL PONDOK PESANTREN ABUDAR DA' LOMBOK TENGAH (Kpi Ummat TV)"
+										allowFullScreen
+										style={{
+											borderRadius: 5,
+										}}
+									/>
+								</AspectRatio>
+							</GridItem>
+							<GridItem
+								w="100%"
+								p={2}
+								bg="gray.50"
+								rounded={"lg"}
+								shadow={"md"}
+								colSpan={{ base: 8, md: 3 }}
+							>
+								<AspectRatio
+									ratio={{ base: 3 / 1.5, lg: 3 / 1.53, xl: 3 / 1.56 }}
 								>
-									<GridItem
-										w="100%"
-										p={2}
-										bg="gray.50"
-										rounded={"lg"}
-										shadow={"md"}
-										colSpan={{ base: 8, md: 5 }}
-										rowSpan={2}
-									>
-										<AspectRatio ratio={{ base: 3 / 1.5, md: 4 / 2.6 }}>
-											<iframe
-												src={latestVideos[0].url}
-												title="PROFIL PONDOK PESANTREN ABUDAR DA' LOMBOK TENGAH (Kpi Ummat TV)"
-												allowFullScreen
-												style={{
-													borderRadius: 5,
-												}}
-											/>
-											{/* <Image
-												src={latestVideos[0].url}
-												alt={"Image"}
-												objectFit={"cover"}
-											/> */}
-										</AspectRatio>
-									</GridItem>
-									<GridItem
-										w="100%"
-										p={2}
-										bg="gray.50"
-										rounded={"lg"}
-										shadow={"md"}
-										colSpan={{ base: 8, md: 3 }}
-									>
-										<AspectRatio
-											ratio={{ base: 3 / 1.5, lg: 3 / 1.53, xl: 3 / 1.56 }}
-										>
-											<iframe
-												src={latestVideos[1].url}
-												title="Egy Maulana -Suara Merdu Membaca Qur'an"
-												allowFullScreen
-												style={{
-													borderRadius: 5,
-												}}
-											/>
-											{/* <Image
-												src={latestVideos[1].url}
-												alt={"Image"}
-												objectFit={"cover"}
-											/> */}
-										</AspectRatio>
-									</GridItem>
-									<GridItem
-										w="100%"
-										p={2}
-										bg="gray.50"
-										rounded={"lg"}
-										shadow={"md"}
-										colSpan={{ base: 8, md: 3 }}
-									>
-										<AspectRatio
-											ratio={{ base: 3 / 1.5, lg: 3 / 1.53, xl: 3 / 1.56 }}
-										>
-											<iframe
-												title="naruto"
-												src={latestVideos[2].url}
-												allowFullScreen
-												style={{
-													borderRadius: 5,
-												}}
-											/>
-											{/* <Image
-												src={latestVideos[2].url}
-												alt={"Image"}
-												objectFit={"cover"}
-											/> */}
-										</AspectRatio>
-									</GridItem>
-								</Grid>
-								{/* Slider */}
-								<VideoSlider videos={latestVideos} />
-							</Fragment>
-						)}
+									<iframe
+										src={latestVideos[1].url}
+										title="Egy Maulana -Suara Merdu Membaca Qur'an"
+										allowFullScreen
+										style={{
+											borderRadius: 5,
+										}}
+									/>
+								</AspectRatio>
+							</GridItem>
+							<GridItem
+								w="100%"
+								p={2}
+								bg="gray.50"
+								rounded={"lg"}
+								shadow={"md"}
+								colSpan={{ base: 8, md: 3 }}
+							>
+								<AspectRatio
+									ratio={{ base: 3 / 1.5, lg: 3 / 1.53, xl: 3 / 1.56 }}
+								>
+									<iframe
+										title="naruto"
+										src={latestVideos[2].url}
+										allowFullScreen
+										style={{
+											borderRadius: 5,
+										}}
+									/>
+								</AspectRatio>
+							</GridItem>
+						</Grid>
+						{/* Slider */}
+						<VideoSlider videos={latestVideos} />
 					</Fragment>
-				) : (
-					<Text> Loading ...</Text>
 				)}
 			</Box>
 		</Box>

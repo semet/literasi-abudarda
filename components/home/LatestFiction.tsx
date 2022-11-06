@@ -8,9 +8,11 @@ import {
 	IconButton,
 	Image,
 	Link,
+	Skeleton,
 	Stack,
 	Text,
 } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import {
 	FaCalendarAlt,
@@ -29,8 +31,18 @@ import SectionSubTitle from "../shared/SectionSubTitle";
 import SectionTitle from "../shared/SectionTitle";
 import FeaturedFiction from "./FeaturedFiction";
 import FictionSlider from "./FictionSlider";
+import FictionSliderSkeleton from "./FictionSliderSkeleton";
+import { FictionArticleWithDetails } from "common";
 
 const LatestFiction = () => {
+	const { data, isLoading, isError } = useQuery<FictionArticleWithDetails[]>(
+		["latestFictions"],
+		async () => {
+			const res = await fetch("/api/fiction/latest");
+			const data = await res.json();
+			return data;
+		}
+	);
 	return (
 		<Box
 			px={"4"}
@@ -62,7 +74,8 @@ const LatestFiction = () => {
 			<FeaturedFiction />
 			{/* Article List */}
 			<Box py={"14"}>
-				<FictionSlider />
+				{isLoading && <FictionSliderSkeleton />}
+				{data !== undefined && <FictionSlider article={data} />}
 			</Box>
 		</Box>
 	);
