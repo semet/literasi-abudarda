@@ -64,7 +64,7 @@ const FictionMainCard: React.FC<{ article: FictionArticleWithDetails }> = ({
 							}}
 							href={`/fiction/${article.slug}`}
 						>
-							<Heading as={"h3"} fontSize={{ base: "2xl", sm: "3xl" }}>
+							<Heading as={"h3"} fontSize={{ base: "xl", sm: "3xl" }}>
 								{article.title}
 							</Heading>
 						</ChakraNextLink>

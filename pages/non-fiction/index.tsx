@@ -54,54 +54,11 @@ const NonFiction = () => {
 				<title>Karangan Non-fiksi</title>
 			</Head>
 			<Box p={"4"} experimental_spaceY={"4"}>
-				{/* Filter Property */}
-				<Flex gap={4} w={"container.sm"} alignItems={"center"}>
-					<Box flex={1}>
-						<Select
-							placeholder={"Category"}
-							rounded={"base"}
-							variant={"outline"}
-							_focus={{
-								ring: "none",
-							}}
-						>
-							<option value="option1">Option 1</option>
-							<option value="option2">Option 2</option>
-							<option value="option3">Option 3</option>
-						</Select>
-					</Box>
-					<Box flex={1}>
-						<Select
-							placeholder={"Filter By"}
-							rounded={"base"}
-							variant={"outline"}
-							_focus={{
-								ring: "none",
-							}}
-						>
-							<option value="option1">Option 1</option>
-							<option value="option2">Option 2</option>
-							<option value="option3">Option 3</option>
-						</Select>
-					</Box>
-					<Box flex={1}>
-						<Select
-							placeholder={"Archive"}
-							rounded={"base"}
-							variant={"outline"}
-							_focus={{
-								ring: "none",
-							}}
-						>
-							<option value="option1">Option 1</option>
-							<option value="option2">Option 2</option>
-							<option value="option3">Option 3</option>
-						</Select>
-					</Box>
-					<Icon as={FaLayerGroup} fontSize={"2xl"} color={"messenger.400"} />
-				</Flex>
 				{/* Main Content */}
-				<Grid templateColumns={"repeat(2, 1fr)"} gap={6}>
+				<Grid
+					templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+					gap={6}
+				>
 					{isLoading && (
 						<Fragment>
 							{Array(2)
