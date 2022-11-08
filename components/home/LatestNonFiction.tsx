@@ -1,12 +1,24 @@
 import { Box, Flex, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import SectionSubTitle from "../shared/SectionSubTitle";
 import SectionTitle from "../shared/SectionTitle";
 import FeaturedNonFiction from "./FeaturedNonFiction";
 import NonFictionCard from "./NonFictionCard";
 import NonFictionSlider from "./NonFictionSlider";
+import { NonFictionArticleWithDetails } from "common";
+import NonFictionSliderSkeleton from "./NonFictionSliderSkeleton";
 
 const LatestNonFiction = () => {
+	const {
+		data: latestNonfictions,
+		isLoading,
+		isError,
+	} = useQuery<NonFictionArticleWithDetails[]>(["latestNonfictions"], async () => {
+		const res = await fetch("/api/nonfiction/latest");
+		const data = await res.json();
+		return data;
+	});
 	return (
 		<Box
 			px={"4"}
@@ -36,7 +48,10 @@ const LatestNonFiction = () => {
 				</Box>
 			</Flex>
 			<Box w={"full"} pt={"6"}>
-				<NonFictionSlider />
+				{isLoading && <NonFictionSliderSkeleton />}
+				{latestNonfictions !== undefined && (
+					<NonFictionSlider articles={latestNonfictions} />
+				)}
 			</Box>
 		</Box>
 	);

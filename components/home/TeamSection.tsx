@@ -10,6 +10,7 @@ import { Fragment } from "react";
 import { Team } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import TeamSlider from "./TeamSlider";
+import TeamSliderSkeleton from "./TeamSliderSkeleton";
 
 const TeamSection = () => {
 	const {
@@ -35,12 +36,8 @@ const TeamSection = () => {
 			</Flex>
 			{/* Slider */}
 			<Box my={4}>
-				{!isLoading ? (
-					<Fragment>{allTeams && <TeamSlider teams={allTeams} />}</Fragment>
-				) : (
-					<Text>Loading ...</Text>
-				)}
-				{/* <TeamSlider teams={allTeams} /> */}
+				{isLoading && <TeamSliderSkeleton />}
+				{allTeams !== undefined && <TeamSlider teams={allTeams} />}
 			</Box>
 		</Box>
 	);

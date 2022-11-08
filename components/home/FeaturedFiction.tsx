@@ -98,6 +98,7 @@ const FeaturedFiction = () => {
 							boxShadow={"dark-lg"}
 							transform={"rotate(-4deg)"}
 							transition={"all .35s ease-in-out"}
+							fallback={<Skeleton w={"full"} h={"500px"} rounded={"base"} />}
 							_hover={{
 								transform: "rotate(5deg)",
 							}}

@@ -1,4 +1,4 @@
-import { Box, Flex, IconButton, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Image, Skeleton, Stack, Text } from "@chakra-ui/react";
 import { Team } from "@prisma/client";
 import React from "react";
 import { FaFacebookF, FaTwitter, FaYoutube } from "react-icons/fa";
@@ -22,7 +22,9 @@ const TeamCard: React.FC<{ team: Team }> = ({ team }) => {
 					src={image!}
 					alt={"Article 2"}
 					roundedTop={"md"}
+					objectFit={"cover"}
 					w={"100%"}
+					fallback={<Skeleton w={"full"} h={"400px"} />}
 					_groupHover={{
 						transform: "scale(1.1)",
 					}}

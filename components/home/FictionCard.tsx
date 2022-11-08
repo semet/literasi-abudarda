@@ -1,5 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Box, Flex, Icon, IconButton, Image, Stack, Text } from "@chakra-ui/react";
+import {
+	Box,
+	Flex,
+	Icon,
+	IconButton,
+	Image,
+	Skeleton,
+	Stack,
+	Text,
+} from "@chakra-ui/react";
 import { FictionArticleWithDetails } from "common";
 import {
 	FaCalendarAlt,
@@ -24,13 +33,14 @@ const FictionCard: React.FC<{ article: FictionArticleWithDetails }> = ({ article
 			role={"group"}
 			overflow={"hidden"}
 		>
-			<Box overflow={"hidden"} position={"relative"} bg={"red"}>
+			<Box overflow={"hidden"} position={"relative"}>
 				<Image
 					src={article.image}
 					alt={"Article 2"}
 					roundedTop={"md"}
 					objectFit={"contain"}
 					w={"100%"}
+					fallback={<Skeleton w={"full"} h={"200px"} />}
 					_groupHover={{
 						transform: "scale(1.1)",
 					}}

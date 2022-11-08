@@ -5,6 +5,7 @@ import {
 	Icon,
 	IconButton,
 	Image,
+	Skeleton,
 	Stack,
 	Text,
 } from "@chakra-ui/react";
@@ -43,6 +44,7 @@ const FictionMainCard: React.FC<{ article: FictionArticleWithDetails }> = ({
 				<Box w={{ base: "full", md: "40%" }} overflow={"hidden"}>
 					<Image
 						src={article.image}
+						fallback={<Skeleton w={"full"} h={"full"} />}
 						alt={"Fictional Story"}
 						w={"100%"}
 						h={"100%"}

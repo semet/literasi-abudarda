@@ -1,6 +1,7 @@
 declare module "common" {
 	import Prisma, {
 		Author,
+		Category,
 		Cerpen,
 		FictionArticle,
 		FictionComment,
@@ -24,6 +25,7 @@ declare module "common" {
 
 	type NonFictionArticleWithDetails = NonFictionArticle & {
 		author: Author;
+		category: Category;
 		_count: Prisma.NonFictionArticleCountOutputType;
 	};
 

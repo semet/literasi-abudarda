@@ -1,5 +1,15 @@
-import { Box, Flex, Icon, IconButton, Image, Stack, Text } from "@chakra-ui/react";
+import {
+	Box,
+	Flex,
+	Icon,
+	IconButton,
+	Image,
+	Skeleton,
+	Stack,
+	Text,
+} from "@chakra-ui/react";
 import React from "react";
+import { NonFictionArticleWithDetails } from "common";
 import {
 	FaCalendarAlt,
 	FaComment,
@@ -10,7 +20,9 @@ import {
 	FaWhatsapp,
 } from "react-icons/fa";
 
-const NonFictionCard = () => {
+const NonFictionCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({
+	article,
+}) => {
 	return (
 		<Box
 			display={"flex"}
@@ -26,7 +38,8 @@ const NonFictionCard = () => {
 		>
 			<Box h={"400px"} overflow={"hidden"} position={"relative"}>
 				<Image
-					src={"/images/blog/travel/07.jpg"}
+					src={article.image}
+					fallback={<Skeleton w={"full"} h={"400px"} />}
 					alt={"non fiction"}
 					w={"100%"}
 					objectFit={"cover"}
@@ -89,20 +102,22 @@ const NonFictionCard = () => {
 						letterSpacing={"wide"}
 						lineHeight={"tall"}
 					>
-						Lorem ipsum dolor sit amet ctetur adipisicing elit.
+						{article.title}
 					</Text>
 					<Stack direction={"row"} align={"center"} gap={2}>
 						<Flex align={"center"} gap={2} color={"teal.700"}>
 							<Icon as={FaCalendarAlt} fontSize={"xs"} />
-							<Text fontSize={"xs"}>{new Date().toDateString()}</Text>
+							<Text fontSize={"xs"}>
+								{new Date(article.createdAt).toDateString()}
+							</Text>
 						</Flex>
 						<Flex align={"center"} gap={2} color={"gray.600"}>
 							<Icon as={FaUser} fontSize={"xs"} />
-							<Text fontSize={"xs"}>Rifki</Text>
+							<Text fontSize={"xs"}>{article.author.name}</Text>
 						</Flex>
 						<Flex align={"center"} gap={2} color={"gray.600"}>
 							<Icon as={FaComment} fontSize={"xs"} />
-							<Text fontSize={"xs"}>10 Comments</Text>
+							<Text fontSize={"xs"}>{article._count.comments} Comments</Text>
 						</Flex>
 					</Stack>
 				</Stack>

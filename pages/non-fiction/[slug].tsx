@@ -1,4 +1,14 @@
-import { Box, Divider, Flex, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react";
+import {
+	Box,
+	Divider,
+	Flex,
+	Heading,
+	Icon,
+	Image,
+	Skeleton,
+	Stack,
+	Text,
+} from "@chakra-ui/react";
 import { NonFictionArticleWithDetails } from "common";
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
@@ -31,6 +41,7 @@ const NonFictionDetail: NextPage<{ article: NonFictionArticleWithDetails }> = ({
 								<Box maxH={"600px"} overflow={"hidden"} bg={"red"}>
 									<Image
 										src={article.image}
+										fallback={<Skeleton w={"full"} h={"400px"} />}
 										alt={"Detail"}
 										objectFit={"cover"}
 										w={"full"}

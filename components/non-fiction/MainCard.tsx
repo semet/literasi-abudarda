@@ -7,6 +7,7 @@ import {
 	IconButton,
 	Image,
 	Link,
+	Skeleton,
 	Stack,
 	Text,
 } from "@chakra-ui/react";
@@ -30,7 +31,8 @@ const MainCard: React.FC<{ article: NonFictionArticleWithDetails }> = ({ article
 			<Stack bg={"gray.100"} rounded={"lg"} overflow={"hidden"}>
 				<Box maxH={"350px"} overflow={"hidden"}>
 					<Image
-						src={"/images/blog/travel/04.jpg"}
+						src={article.image}
+						fallback={<Skeleton w={"full"} h={"300px"} />}
 						alt={"non-fiction Story"}
 						w={"100%"}
 						objectFit={"cover"}
